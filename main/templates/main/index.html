@@ -1,0 +1,20 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+
+{% include 'main/header.html' %}
+
+<html >
+    <div class = "index_clock" style="text-align: center">
+        <section class="clock">
+            <div class="dot"></div>
+            <div class="spire hour"></div>
+            <div class="spire min"></div>
+            <div class="spire sec"></div>
+        </section>
+
+        <div class="digit">00:00</div>
+    </div>
+  
+{% include 'main/footer.html' %}
