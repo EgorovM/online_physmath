@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-.title {
+.clock_title {
   position: absolute;
   top: 0;
   font: 36px Arial;
@@ -24,7 +24,7 @@
   height: 200px;
   border: solid 10px #333;
   border-radius: 50%;
-  margin: calc(50vh - 100px) calc(50% - 100px);
+  margin: 0 auto;
   position: relative;
   background: rgba(256, 256, 256, 0.25);
   cursor: pointer;
@@ -117,7 +117,7 @@
 
 .digit {
   position: absolute;
-  top: calc(50% - 100px);
+  top: calc(50% - 120px);
   left: calc(50% - 100px);
   width: 200px;
   font: 42px/200px Arial;
@@ -152,12 +152,3 @@ footer a:hover {
   color: rgba(256, 256, 256, 0.5);
 }
 
-.background {
-  background: #9b59b6;
-  background: linear-gradient(to top left, #9b59b6, #f39c12);
-  position: fixed;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  z-index: -100;
-}

@@ -152,12 +152,3 @@ footer a:hover {
   color: rgba(256, 256, 256, 0.5);
 }
 
-.background {
-  background: #9b59b6;
-  background: linear-gradient(to top left, #9b59b6, #f39c12);
-  position: fixed;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  z-index: -100;
-}
