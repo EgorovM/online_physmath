@@ -1,5 +1,5 @@
 from django.shortcuts 			import render, HttpResponseRedirect, redirect
-from .models					import Pupil
+from .models					import Pupil, Order
 from django.utils 				import timezone
 from django.db 					import IntegrityError
 from django.core.paginator 		import Paginator, EmptyPage, PageNotAnInteger
@@ -33,8 +33,6 @@ def index(request):
 
 def information(request):
 	context = {}
-
-
 
 	pupils = Pupil.objects.all()
 	pupils_list = sorted(pupils, key = operator.attrgetter('name'))
@@ -72,9 +70,26 @@ def monitoring(request):
 def about(request):
 	context = {}
 
+	if request.method == "POST":
+		if "ok_button" in request.POST:
+			email   = request.POST["email"]
+			school  = request.POST["school"]
+			message = request.POST["message"]
+
+			order = Order()
+
+			order.email = email
+			order.school_name = school
+			order.message = message
+			order.date = timezone.now()
+
+			order.save()
+			
+
 	request = render(request, 'main/about.html')
 
 	return request
+
 def refresh(request):
 	pupils = Pupil.objects.all()
 
