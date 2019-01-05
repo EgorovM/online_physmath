@@ -1,5 +1,5 @@
 from django.shortcuts 			import render, HttpResponseRedirect, redirect
-from .models					import Pupil, Order
+from .models					import Pupil
 from django.utils 				import timezone
 from django.db 					import IntegrityError
 from django.core.paginator 		import Paginator, EmptyPage, PageNotAnInteger
@@ -22,17 +22,10 @@ translate = {
 	"absent": "Отсуствует"
 }
 
-def index(request):
-	context = {}
-
-
-
-	request = render(request, 'main/index.html', context)
-
-	return request
-
 def information(request):
 	context = {}
+
+
 
 	pupils = Pupil.objects.all()
 	pupils_list = sorted(pupils, key = operator.attrgetter('name'))
@@ -43,23 +36,31 @@ def information(request):
 
 	return request
 
+
+def index(request):
+    context = {}
+
+    if request.GET.get("qrcode") and request.GET.get("secret_word"):
+        get_secret_word = request.GET["secret_word"]
+
+        if get_secret_word == secret_word:
+            qrcode = request.GET["qrcode"]
+
+            pupil 			  = Pupil.objects.get(qrcode = qrcode)
+            pupil.status 	  = "present"
+            pupil.arrive_time =  timezone.localtime(timezone.now())
+
+            pupil.save()
+
+    request = render(request, 'main/index.html', context)
+
+    return request
+
 def monitoring(request):
 	context = {}
 
 	pupils = Pupil.objects.all()
 	pupils_list = sorted(pupils, key=operator.attrgetter('location','name'))
-
-	if request.GET.get("qrcode") and request.GET.get("secret_word"):
-		get_secret_word = request.GET["secret_word"]
-
-		if get_secret_word == secret_word:
-			qrcode = request.GET["qrcode"]
-
-			pupil 			  = Pupil.objects.get(qrcode = qrcode)
-			pupil.status 	  = "present"
-			pupil.arrive_time =  timezone.localtime(timezone.now())
-
-			pupil.save()
 
 	context["pupils_list"] = pupils_list
 
@@ -70,7 +71,7 @@ def monitoring(request):
 def about(request):
 	context = {}
 
-	if request.method == "POST":
+    if request.method == "POST":
 		if "ok_button" in request.POST:
 			email   = request.POST["email"]
 			school  = request.POST["school"]
@@ -84,7 +85,6 @@ def about(request):
 			order.date = timezone.now()
 
 			order.save()
-			
 
 	request = render(request, 'main/about.html')
 
