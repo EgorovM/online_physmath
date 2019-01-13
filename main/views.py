@@ -1,5 +1,5 @@
 from django.shortcuts 			import render, HttpResponseRedirect, redirect
-from .models					import Pupil
+from .models					import Pupil, Order
 from django.utils 				import timezone
 from django.db 					import IntegrityError
 from django.core.paginator 		import Paginator, EmptyPage, PageNotAnInteger
