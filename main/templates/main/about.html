@@ -1,4 +1,4 @@
-
+{% load staticfiles %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -183,14 +183,14 @@ for (var attr in meta) {
       <div class="nav-wrapper">
         <a href="/" class="brand-logo"><i class="icon-diamond white-text"></i></a>
         <ul id="nav-mobile" class="ag hide-on-med-and-down">
-          <li><a href="#">Купить сейчас!</a></li>
+          <li><a href="#" id = "buy">Купить сейчас!</a></li>
         </ul>
 
         <a href="#" data-activates="slide-out" class="button-collapse ag"><i class="material-icons white-text">menu</i></a>
       </div>
     </nav>
     <ul id="slide-out" class="side-nav">
-      <li><a class="waves-effect waves-teal" href="#">Купить сейчас!</a></li>
+      <li><a class="waves-effect waves-teal" href="#" id = "buy">Купить сейчас!</a></li>
     </ul>
 
     <div class="ai full-height fh">
@@ -269,9 +269,8 @@ for (var attr in meta) {
       </div>
     </div>
 
-
     <!-- Pricing Tables -->
-    <div class="v valign-wrapper">
+    <div class="v valign-wrapper" id = "priceform">
       <div class="c ci">
         <div class="d iv jc offset-m1">
           <div class="c">
@@ -378,7 +377,7 @@ for (var attr in meta) {
     </div>
     
 
-    <div class="v r valign-wrapper">
+    <div class="v r valign-wrapper" id = "buyform">
       <div class="c ci">
         <form action = "." class="d iv jc offset-m1" method = "post">
        	  {% csrf_token %}
@@ -420,8 +419,8 @@ for (var attr in meta) {
             <div class="d ka ko">
               <h5>Продукт</h5>
               <ul>
-                <li><a href="#!">Стоимость</a></li>
-                <li><a href="#!">Купить</a></li>
+                <li id = "price"><a href="#!">Стоимость</a></li>
+                <li id = "buy"><a href="#!">Купить</a></li>
               </ul>
             </div>
             <div class="d ka ko">
@@ -438,9 +437,22 @@ for (var attr in meta) {
     </footer>
 
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/materialize/0.98.2/js/materialize.min.js"></script>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="//cdn.shopify.com/s/files/1/1775/8583/t/1/assets/startup-all-min.js?2711767630378816724" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    	$("#buy").click(function() {
+		    $([document.documentElement, document.body]).animate({
+		        scrollTop: $("#buyform").offset().top
+		    }, 2000);
+		});
 
+		$("#price").click(function() {
+		    $([document.documentElement, document.body]).animate({
+		        scrollTop: $("#priceform").offset().top
+		    }, 2000);
+		});
+		
+    </script>
   </body>
 </html>
