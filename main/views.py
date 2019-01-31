@@ -1,6 +1,5 @@
 from django.shortcuts 			import render, HttpResponseRedirect, redirect
 from .models					import Pupil, Order
-from django.utils 				import timezone
 from django.db 					import IntegrityError
 from django.core.paginator 		import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
@@ -9,7 +8,9 @@ from django.contrib.auth 		import logout
 from django.contrib 			import auth
 from django.utils 				import timezone
 from PIL      					import Image
-import datetime
+from pytz 						import timezone
+from datetime 					import datetime, timedelta
+
 import pytz
 import json
 import operator
@@ -22,10 +23,10 @@ translate = {
 	"absent": "Отсуствует"
 }
 
+ykt_utc = timezone('Asia/Yakutsk')
+
 def information(request):
 	context = {}
-
-
 
 	pupils = Pupil.objects.all()
 	pupils_list = sorted(pupils, key = operator.attrgetter('name'))
@@ -48,7 +49,7 @@ def index(request):
 
             pupil 			  = Pupil.objects.get(qrcode = qrcode)
             pupil.status 	  = "present"
-            pupil.arrive_time =  timezone.localtime(timezone.now())
+            pupil.arrive_time =  datetime.now(tz = ykt_utc).time()
 
             pupil.save()
 
@@ -89,6 +90,14 @@ def about(request):
     request = render(request, 'main/about.html')
 
     return request
+
+def profile(request, views_profile_id):
+	context = {}
+	profile = Pupil.objects.get(id = views_profile_id)
+	context["profile"] = profile
+	
+	request = render(request, "main/profile.html", context)
+	return request
 
 def refresh(request):
 	pupils = Pupil.objects.all()

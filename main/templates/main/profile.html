@@ -1,0 +1,33 @@
+{% include 'main/header.html' %}
+
+<div class = "col s10">
+    <div style="background-size: cover; background-position: center; background-image:  url(/media/images/profile_background.jpg); height: 500px; background-position: relative">
+        <div style="background-color: rgba(0,0,0,0.2); background-position: absolute;height: 500px;" >
+            <div class = "row" style="padding-top:390px">
+
+                <div class = "col s12" style="position: relative; height: 90px;">
+                    <div  style="background-image: url(/media/{{profile.photo}}); background-size: cover;background-position: center; position: absolute; height:300px; width: 300px; z-index: 100;
+                    left: 115px; top:-96px; border-radius: 100%; border: 3px solid white;"></div>
+                    <div class = "row">
+                        <div class = "col s8 white-text right center" 
+                        style="display: -webkit-flex; 
+                        -webkit-justify-content: flex-start;
+                        display: flex;
+                        justify-content: space-between;">
+                            <p> Средняя оценка:<br>
+                                4.7</p>
+                            <p> Пропусков:<br>
+                                4</p>
+                            <p> Класс:<br>
+                                11физмат</p>
+                            <p> Куратор:<br>
+                                Туяра Анатольевна</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'main/footer.html' %}

@@ -5,15 +5,28 @@ from django.contrib.auth.models     import User
 from django.utils 					import timezone
 from django 						import forms
 
+LOCATION = (
+    ("urban", "Городской"),
+    ("boarding", "Интернат"),
+    ("relativity", "У родственников")
+)
+
+STATUS = (
+	("absent", "Отсутствует"),
+	("present", "Присутствует"),
+	("ill", "Болен"),
+	("reason", "Уважительная причина"),
+)
+
 class Pupil(models.Model):
 	qrcode      = models.CharField(max_length = 50)
 	name        = models.CharField(max_length = 50)
 	grade       = models.CharField(max_length = 50)
-	location    = models.CharField(max_length = 50) 
-	status      = models.CharField(max_length = 50, default = "absent")
+	location    = models.CharField(max_length = 50, choices = LOCATION) 
+	status      = models.CharField(max_length = 50, default = "absent", choices = STATUS)
 
-	arrive_time = models.DateTimeField('date arrive')
-	photo     = models.ImageField(upload_to = "images/", default = "images/default.jpg")
+	arrive_time	   = models.TimeField('time arrive')
+	photo     	   = models.ImageField(upload_to = "images/", default = "images/default.jpg")
 	non_attendance = models.IntegerField(default = 0);
 
 	def __str__(self):
