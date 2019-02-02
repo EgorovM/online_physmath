@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
+
 from __future__                     import unicode_literals
 from django.utils.encoding          import python_2_unicode_compatible
 from django.db                      import models
 from django.contrib.auth.models     import User
-from django.utils 					import timezone
+from datetime 					    import datetime
 from django 						import forms
 
 LOCATION = (
@@ -22,10 +24,10 @@ class Pupil(models.Model):
 	qrcode      = models.CharField(max_length = 50)
 	name        = models.CharField(max_length = 50)
 	grade       = models.CharField(max_length = 50)
-	location    = models.CharField(max_length = 50, choices = LOCATION) 
+	location    = models.CharField(max_length = 50, choices = LOCATION)
 	status      = models.CharField(max_length = 50, default = "absent", choices = STATUS)
 
-	arrive_time	   = models.TimeField('time arrive')
+	arrive_time	   = models.TimeField('time arrive', default = datetime.now().time())
 	photo     	   = models.ImageField(upload_to = "images/", default = "images/default.jpg")
 	non_attendance = models.IntegerField(default = 0);
 

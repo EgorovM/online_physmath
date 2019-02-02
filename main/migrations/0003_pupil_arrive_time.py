@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pupil',
             name='arrive_time',
-            field=models.DateTimeField(blank=True, default=datetime.datetime(2018, 11, 16, 12, 40, 17, 179344, tzinfo=utc), verbose_name='date arrive'),
+            field=models.DateTimeField(blank=True, default="some string", verbose_name='date arrive'),
             preserve_default=False,
         ),
     ]
