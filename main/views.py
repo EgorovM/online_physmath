@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts 			import render, HttpResponseRedirect, redirect
 from .models					import Pupil, Order
 from django.db 					import IntegrityError
@@ -58,16 +60,16 @@ def index(request):
     return request
 
 def monitoring(request):
-	context = {}
+    context = {}
 
-	pupils = Pupil.objects.all()
-	pupils_list = sorted(pupils, key=operator.attrgetter('location','name'))
+    pupils = Pupil.objects.all()
+    pupils_list = sorted(pupils, key=operator.attrgetter('location','name'))
 
-	context["pupils_list"] = pupils_list
+    context["pupils_list"] = pupils_list
 
-	request = render(request, 'main/monitoring.html', context)
+    request = render(request, 'main/monitoring.html', context)
 
-	return request
+    return request
 
 def about(request):
     context = {}
@@ -95,7 +97,7 @@ def profile(request, views_profile_id):
 	context = {}
 	profile = Pupil.objects.get(id = views_profile_id)
 	context["profile"] = profile
-	
+
 	request = render(request, "main/profile.html", context)
 	return request
 
