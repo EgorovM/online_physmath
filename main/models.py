@@ -48,7 +48,6 @@ class Pupil(models.Model):
 	status      = models.CharField(max_length = 50, default = "absent", choices = STATUS)
 
 	arrive_time	   = models.TimeField('time arrive', null = True, blank = True)
-
 	photo     	   = models.ImageField(upload_to = "images/", default = "images/default.jpg")
 	non_attendance = models.IntegerField(default = 0);
 
