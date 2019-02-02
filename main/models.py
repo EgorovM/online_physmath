@@ -12,20 +12,40 @@ LOCATION = (
 )
 
 STATUS = (
-	("absent", "Отсутствует"),
+	("absent",  "Отсутствует"),
 	("present", "Присутствует"),
-	("ill", "Болен"),
-	("reason", "Уважительная причина"),
+	("ill",     "Болеет"),
+	("reason",  "Уважительная причина"),
+)
+
+GRADE = (
+	("11FM","11 физико-математический класс"),
+	("11ENG","11 инженерный класс"),
+	("11TECH","11 технический класс"),
+	("11PTH","11 политехнический класс"),
+	("11BCH","11 биолого-химический класс"),
+	("11HUM","11 гуманитарный класс"),
+	("10FM","10 физико-математический"),
+	("10ENG","10 инженерный класс"),
+	("10TECH","10 технический класс"),
+	("10PTH","10 политехнический класс"),
+	("10BCH","10 биолого-химический класс"),
+	("10HUM","10 гуманитарный класс"),
+	("9","9"),
+	("8","8"),
+	("7","7"),
+	("6","6"),
+	("5","5"),
 )
 
 class Pupil(models.Model):
 	qrcode      = models.CharField(max_length = 50)
 	name        = models.CharField(max_length = 50)
-	grade       = models.CharField(max_length = 50)
+	grade       = models.CharField(max_length = 50, choices = GRADE)
 	location    = models.CharField(max_length = 50, choices = LOCATION) 
 	status      = models.CharField(max_length = 50, default = "absent", choices = STATUS)
 
-	arrive_time	   = models.TimeField('time arrive')
+	arrive_time	   = models.TimeField('time arrive', null = True, blank = True)
 	photo     	   = models.ImageField(upload_to = "images/", default = "images/default.jpg")
 	non_attendance = models.IntegerField(default = 0);
 

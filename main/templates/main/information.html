@@ -7,19 +7,22 @@
 
         {% for pupil in pupils %}
         <filtertag>
-            <ul class="collection">
-                <li class="collection-item avatar">
-                    <img src="/media/{{ pupil.photo }}" alt="" class="circle img-responsive">
-                    <span class="title">{{ pupil.name }}</span>
-                    <p> {% if pupil.status == "absent" %}
-                            <font class = "red-text">Отсуствует</font>
-                        {% else %}
-                            <font class = "green-text">Присутствует</font>
-                        {% endif %} <br>
-                        <font class = "brown-text" >{{ pupil.grade }} </font>
-                    </p>
-                </li>
-            </ul>
+            <a href = "/profile/{{pupil.id}}">
+                <ul class="collection">
+                    <li class="collection-item avatar">
+                        <img src="/media/{{ pupil.photo }}" alt="" class="circle img-responsive">
+                        <span class="title black-text">{{ pupil.name }}</span>
+                        <p> 
+                            {% if pupil.status == "absent" %}
+                                <font class = "red-text">Отсуствует</font>
+                            {% else %}
+                                <font class = "green-text">Присутствует</font>
+                            {% endif %} <br>
+                            <font class = "brown-text" >{{ pupil.grade }} </font>
+                        </p>
+                    </li>
+                </ul>
+            </a>
         </filtertag>
         {% endfor %}
     </div>
