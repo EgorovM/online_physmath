@@ -1,28 +1,28 @@
 {% include 'main/header.html' %}
 
-<div class = "col s10">
-    <div style="background-size: cover; background-position: center; background-image:  url(/media/images/profile_background.jpg); height: 500px; background-position: relative">
-        <div style="background-color: rgba(0,0,0,0.2); background-position: absolute;height: 500px;" >
-            <div class = "row" style="padding-top:390px">
+<div class = "row center">
+    <div class="row">
+        <div class="col s8 m4 offset-m4 offset-s2">
+            <div class="card">
+                <div class="card-image">
+                  <img src="/media/{{profile.photo}}" style="border-radius: 10px"> 
+                  <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">favorite</i></a>
+                </div>
+                <div class="card-content">
+                    <h5 class = "center">{{profile.name}}</h5>
+                    <br>
+                    <div style="display: flex; justify-content: space-around;" class = "center">
+                        <p> <font class="grey-text">Класс</font><br>
+                            {{profile.grade}}
+                        </p>
 
-                <div class = "col s12" style="position: relative; height: 90px;">
-                    <div  style="background-image: url(/media/{{profile.photo}}); background-size: cover;background-position: center; position: absolute; height:300px; width: 300px; z-index: 100;
-                    left: 115px; top:-96px; border-radius: 100%; border: 3px solid white;"></div>
-                    <div class = "row">
-                        <div class = "col s8 white-text right center" 
-                        style="display: -webkit-flex; 
-                        -webkit-justify-content: flex-start;
-                        display: flex;
-                        justify-content: space-between;">
-                            <p> Средняя оценка:<br>
-                                4.7</p>
-                            <p> Пропусков:<br>
-                                4</p>
-                            <p> Класс:<br>
-                                11физмат</p>
-                            <p> Куратор:<br>
-                                Туяра Анатольевна</p>
-                        </div>
+                        <p> <font class="grey-text">Пропусков</font><br>
+                            {{profile.non_attendance}}
+                        </p>
+
+                        <p> <font class="grey-text">Проживание</font><br>
+                            {{profile.location}}
+                        </p>
                     </div>
                 </div>
             </div>
