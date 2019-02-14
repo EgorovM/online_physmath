@@ -16,6 +16,7 @@ LOCATION = (
 STATUS = (
 	("absent",  "Отсутствует"),
 	("present", "Присутствует"),
+	("leave", "Вышел из школы"),
 	("ill",     "Болеет"),
 	("reason",  "Уважительная причина"),
 )
@@ -44,7 +45,9 @@ class Pupil(models.Model):
 	qrcode      = models.CharField(max_length = 50)
 	name        = models.CharField(max_length = 50)
 	grade       = models.CharField(max_length = 50, choices = GRADE)
-	location    = models.CharField(max_length = 50, choices = LOCATION) 
+	location    = models.CharField(max_length = 50, choices = LOCATION)
+	eating      = models.BooleanField(default = False)
+	inboard     = models.BooleanField(default = True)
 	status      = models.CharField(max_length = 50, default = "absent", choices = STATUS)
 
 	arrive_time	   = models.TimeField('time arrive', null = True, blank = True)
