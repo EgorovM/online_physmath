@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth 		import authenticate
 from django.contrib.auth 		import logout
 from django.contrib 			import auth
-from django.utils 				import timezone
 from PIL      					import Image
 from pytz 						import timezone
 from datetime 					import datetime, timedelta
@@ -18,6 +17,8 @@ import json
 import operator
 from io import StringIO
 import threading
+
+value = {"school_enter":"present","school_exit":"leave"}
 
 secret_word = "axaxloleslivslomaesh"
 
@@ -31,7 +32,7 @@ def information(request):
 	context = {}
 
 	pupils = Pupil.objects.all()
-	pupils_list = sorted(pupils, key = operator.attrgetter('name'))
+	pupils_list = sorted(pupils, key = operator.attrgetter('grade','name'))
 
 	context["pupils"] = pupils_list
 	context["translate"] = translate
@@ -50,10 +51,26 @@ def index(request):
             qrcode = request.GET["qrcode"]
 
             pupil 			  = Pupil.objects.get(qrcode = qrcode)
-            pupil.status 	  = "present"
-            pupil.arrive_time =  datetime.now(tz = ykt_utc).time()
+
+            if request.GET["location"] == "board_enter":
+
+                pupil.inboard = True
+
+            elif request.GET["location"] == "board_exit":
+
+                pupil.inboard = False
+
+            elif request.GET["location"] == "Canteen":
+
+                pupil.eating = True
+
+            else:
+                pupil.status 	  = value[request.GET["location"]]
+                pupil.arrive_time =  datetime.now(tz = ykt_utc).time()
+
 
             pupil.save()
+
 
     request = render(request, 'main/index.html', context)
 
@@ -63,7 +80,7 @@ def monitoring(request):
     context = {}
 
     pupils = Pupil.objects.all()
-    pupils_list = sorted(pupils, key=operator.attrgetter('location','name'))
+    pupils_list = sorted(pupils, key=operator.attrgetter('grade','location','name'))
 
     context["pupils_list"] = pupils_list
 
@@ -85,11 +102,36 @@ def about(request):
             order.email = email
             order.school_name = school
             order.message = message
-            order.date = timezone.now()
+            order.date = datetime.now(tz = ykt_utc)
 
             order.save()
 
     request = render(request, 'main/about.html')
+
+    return request
+
+
+def board(request):
+    context = {}
+
+    pupils = Pupil.objects.filter(location = "boarding")
+    pupils_list = sorted(pupils, key=operator.attrgetter('grade','name'))
+
+    context["pupils"] = pupils_list
+
+    request = render(request, 'main/board.html', context)
+
+    return request
+
+def canteen(request):
+    context = {}
+
+    pupils = Pupil.objects.all()
+    pupils_list = sorted(pupils, key=operator.attrgetter('grade','name'))
+
+    context["pupils"] = pupils_list
+
+    request = render(request, 'main/canteen.html', context)
 
     return request
 
@@ -99,6 +141,7 @@ def profile(request, views_profile_id):
 	context["profile"] = profile
 
 	request = render(request, "main/profile.html", context)
+
 	return request
 
 def refresh(request):

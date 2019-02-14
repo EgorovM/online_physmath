@@ -4,9 +4,8 @@
     <div class = "row">
         <div class = "col s12">
             <ul class="collapsible">
-
                 <li>
-                    <div class="collapsible-header">11 физико-математический класс</div>
+                    <div class="collapsible-header">10 гуманитарный класс</div>
 
                     <div class="collapsible-body">
                         <table lass="striped">
@@ -14,23 +13,78 @@
                 				<tr>
                 					<th>Имя</th>
                 					<th>Статус</th>
-                					<th>Время прихода</th>
+                					<th>Время</th>
                 					<th>Проживает</th>
                 				</tr>
                 	        </thead>
 
                             <tbody>
             					{% for pupil in pupils_list%}
-                                    {% if pupil.grade == "11FM" %}
-                						<tr>            						    
+                                    {% if pupil.grade == "10HUM" %}
+                						<tr>
                 							<td class = "">{{pupil.name}}</td>
                 							{% if pupil.status == "present" %}
                 								<td class = "green-text">Присутствует</td>
+                                            {% elif pupil.status == "leave" %}
+                                                <td class = "orange-text darken-4"> Вышел из школы </td>
                                             {% else %}
-                                                <td class = "red-text">Отсутствует</td>
+                                                <td class = "red-text"> Отсутствует </td>
                 							{% endif %}
 
-                							{% if pupil.status == "present"%}
+                                            {% if pupil.status == "present" or pupil.status == "leave" %}
+                								<td>{{pupil.arrive_time}}</td>
+                							{% else %}
+                								<td></td>
+                							{% endif %}
+
+                                            {% if pupil.location == "urban" %}
+                								<td class = "blue-text"> Городской</td>
+                							{% elif pupil.location == "boarding" %}
+                								<td class or pupil.status == "leave"  = "brown-text"> Интернат</td>
+                							{% else %}
+                								<td class = "lime-text"> У родственников </td>
+                							{% endif %}
+
+                						</tr>
+                                    {% endif %}
+            					{% endfor %}
+            	        	</tbody>
+                		</table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class = "col s12">
+            <ul class="collapsible">
+
+                <li>
+                    <div class="collapsible-header">10 биолого-химический класс</div>
+
+                    <div class="collapsible-body">
+                        <table lass="striped">
+                	        <thead>
+                				<tr>
+                					<th>Имя</th>
+                					<th>Статус</th>
+                					<th>Время</th>
+                					<th>Проживает</th>
+                				</tr>
+                	        </thead>
+
+                            <tbody>
+            					{% for pupil in pupils_list%}
+                                    {% if pupil.grade == "10BCH" %}
+                						<tr>
+                							<td class = "">{{pupil.name}}</td>
+                							{% if pupil.status == "present" %}
+                								<td class = "green-text">Присутствует</td>
+                                            {% elif pupil.status == "leave" %}
+                                                <td class = "orange-text darken-4"> Вышел из школы </td>
+                                            {% else %}
+                                                <td class = "red-text"> Отсутствует </td>
+                							{% endif %}
+
+                							{% if pupil.status == "present" or pupil.status == "leave" %}
                 								<td>{{pupil.arrive_time}}</td>
                 							{% else %}
                 								<td></td>
@@ -43,7 +97,537 @@
                 							{% else %}
                 								<td class = "lime-text"> У родственников </td>
                 							{% endif %}
-                							
+
+                						</tr>
+                                    {% endif %}
+            					{% endfor %}
+            	        	</tbody>
+                		</table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class = "col s12">
+            <ul class="collapsible">
+
+                <li>
+                    <div class="collapsible-header">10 политехнический класс</div>
+
+                    <div class="collapsible-body">
+                        <table lass="striped">
+                	        <thead>
+                				<tr>
+                					<th>Имя</th>
+                					<th>Статус</th>
+                					<th>Время</th>
+                					<th>Проживает</th>
+                				</tr>
+                	        </thead>
+
+                            <tbody>
+            					{% for pupil in pupils_list%}
+                                    {% if pupil.grade == "10PTH" %}
+                						<tr>
+                							<td class = "">{{pupil.name}}</td>
+                							{% if pupil.status == "present" %}
+                								<td class = "green-text">Присутствует</td>
+                                            {% elif pupil.status == "leave" %}
+                                                <td class = "orange-text darken-4"> Вышел из школы </td>
+                                            {% else %}
+                                                <td class = "red-text"> Отсутствует </td>
+                							{% endif %}
+
+                							{% if pupil.status == "present" or pupil.status == "leave" %}
+                								<td>{{pupil.arrive_time}}</td>
+                							{% else %}
+                								<td></td>
+                							{% endif %}
+
+                							{% if pupil.location == "urban" %}
+                								<td class = "blue-text"> Городской</td>
+                							{% elif pupil.location == "boarding" %}
+                								<td class = "brown-text"> Интернат</td>
+                							{% else %}
+                								<td class = "lime-text"> У родственников </td>
+                							{% endif %}
+
+                						</tr>
+                                    {% endif %}
+            					{% endfor %}
+            	        	</tbody>
+                		</table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class = "col s12">
+            <ul class="collapsible">
+
+                <li>
+                    <div class="collapsible-header">10 технический класс </div>
+
+                    <div class="collapsible-body">
+                        <table lass="striped">
+                	        <thead>
+                				<tr>
+                					<th>Имя</th>
+                					<th>Статус</th>
+                					<th>Время</th>
+                					<th>Проживает</th>
+                				</tr>
+                	        </thead>
+
+                            <tbody>
+            					{% for pupil in pupils_list%}
+                                    {% if pupil.grade == "10TECH" %}
+                						<tr>
+                							<td class = "">{{pupil.name}}</td>
+                							{% if pupil.status == "present" %}
+                								<td class = "green-text">Присутствует</td>
+                                            {% elif pupil.status == "leave" %}
+                                                <td class = "orange-text darken-4"> Вышел из школы </td>
+                                            {% else %}
+                                                <td class = "red-text"> Отсутствует </td>
+                							{% endif %}
+
+                							{% if pupil.status == "present" or pupil.status == "leave" %}
+                								<td>{{pupil.arrive_time}}</td>
+                							{% else %}
+                								<td></td>
+                							{% endif %}
+
+                							{% if pupil.location == "urban" %}
+                								<td class = "blue-text"> Городской</td>
+                							{% elif pupil.location == "boarding" %}
+                								<td class = "brown-text"> Интернат</td>
+                							{% else %}
+                								<td class = "lime-text"> У родственников </td>
+                							{% endif %}
+
+                						</tr>
+                                    {% endif %}
+            					{% endfor %}
+            	        	</tbody>
+                		</table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class = "col s12">
+            <ul class="collapsible">
+
+                <li>
+                    <div class="collapsible-header">10 инженерный класс</div>
+
+                    <div class="collapsible-body">
+                        <table lass="striped">
+                	        <thead>
+                				<tr>
+                					<th>Имя</th>
+                					<th>Статус</th>
+                					<th>Время</th>
+                					<th>Проживает</th>
+                				</tr>
+                	        </thead>
+
+                            <tbody>
+            					{% for pupil in pupils_list%}
+                                    {% if pupil.grade == "10ENG" %}
+                						<tr>
+                							<td class = "">{{pupil.name}}</td>
+                							{% if pupil.status == "present" %}
+                								<td class = "green-text">Присутствует</td>
+                                            {% elif pupil.status == "leave" %}
+                                                <td class = "orange-text darken-4"> Вышел из школы </td>
+                                            {% else %}
+                                                <td class = "red-text"> Отсутствует </td>
+                							{% endif %}
+
+                							{% if pupil.status == "present" or pupil.status == "leave" %}
+                								<td>{{pupil.arrive_time}}</td>
+                							{% else %}
+                								<td></td>
+                							{% endif %}
+
+                							{% if pupil.location == "urban" %}
+                								<td class = "blue-text"> Городской</td>
+                							{% elif pupil.location == "boarding" %}
+                								<td class = "brown-text"> Интернат</td>
+                							{% else %}
+                								<td class = "lime-text"> У родственников </td>
+                							{% endif %}
+
+                						</tr>
+                                    {% endif %}
+            					{% endfor %}
+            	        	</tbody>
+                		</table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class = "col s12">
+            <ul class="collapsible">
+
+                <li>
+                    <div class="collapsible-header">10 физико-математический класс</div>
+
+                    <div class="collapsible-body">
+                        <table lass="striped">
+                	        <thead>
+                				<tr>
+                					<th>Имя</th>
+                					<th>Статус</th>
+                					<th>Время</th>
+                					<th>Проживает</th>
+                				</tr>
+                	        </thead>
+
+                            <tbody>
+            					{% for pupil in pupils_list%}
+                                    {% if pupil.grade == "10FM" %}
+                						<tr>
+                							<td class = "">{{pupil.name}}</td>
+                							{% if pupil.status == "present" %}
+                								<td class = "green-text">Присутствует</td>
+                                            {% elif pupil.status == "leave" %}
+                                                <td class = "orange-text darken-4"> Вышел из школы </td>
+                                            {% else %}
+                                                <td class = "red-text"> Отсутствует </td>
+                							{% endif %}
+
+                							{% if pupil.status == "present" or pupil.status == "leave" %}
+                								<td>{{pupil.arrive_time}}</td>
+                							{% else %}
+                								<td></td>
+                							{% endif %}
+
+                							{% if pupil.location == "urban" %}
+                								<td class = "blue-text"> Городской</td>
+                							{% elif pupil.location == "boarding" %}
+                								<td class = "brown-text"> Интернат</td>
+                							{% else %}
+                								<td class = "lime-text"> У родственников </td>
+                							{% endif %}
+
+                						</tr>
+                                    {% endif %}
+            					{% endfor %}
+            	        	</tbody>
+                		</table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class = "col s12">
+            <ul class="collapsible">
+
+                <li>
+                    <div class="collapsible-header">11 гуманитарный класс</div>
+
+                    <div class="collapsible-body">
+                        <table lass="striped">
+                	        <thead>
+                				<tr>
+                					<th>Имя</th>
+                					<th>Статус</th>
+                					<th>Время</th>
+                					<th>Проживает</th>
+                				</tr>
+                	        </thead>
+
+                            <tbody>
+            					{% for pupil in pupils_list%}
+                                    {% if pupil.grade == "11HUM" %}
+                						<tr>
+                							<td class = "">{{pupil.name}}</td>
+                							{% if pupil.status == "present" %}
+                								<td class = "green-text">Присутствует</td>
+                                            {% elif pupil.status == "leave" %}
+                                                <td class = "orange-text darken-4"> Вышел из школы </td>
+                                            {% else %}
+                                                <td class = "red-text"> Отсутствует </td>
+                							{% endif %}
+
+                							{% if pupil.status == "present" or pupil.status == "leave" %}
+                								<td>{{pupil.arrive_time}}</td>
+                							{% else %}
+                								<td></td>
+                							{% endif %}
+
+                							{% if pupil.location == "urban" %}
+                								<td class = "blue-text"> Городской</td>
+                							{% elif pupil.location == "boarding" %}
+                								<td class = "brown-text"> Интернат</td>
+                							{% else %}
+                								<td class = "lime-text"> У родственников </td>
+                							{% endif %}
+
+                						</tr>
+                                    {% endif %}
+            					{% endfor %}
+            	        	</tbody>
+                		</table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class = "col s12">
+            <ul class="collapsible">
+
+                <li>
+                    <div class="collapsible-header">11 биолого-химический класс</div>
+
+                    <div class="collapsible-body">
+                        <table lass="striped">
+                	        <thead>
+                				<tr>
+                					<th>Имя</th>
+                					<th>Статус</th>
+                					<th>Время</th>
+                					<th>Проживает</th>
+                				</tr>
+                	        </thead>
+
+                            <tbody>
+            					{% for pupil in pupils_list%}
+                                    {% if pupil.grade == "11BCH" %}
+                						<tr>
+                							<td class = "">{{pupil.name}}</td>
+                							{% if pupil.status == "present" %}
+                								<td class = "green-text">Присутствует</td>
+                                            {% elif pupil.status == "leave" %}
+                                                <td class = "orange-text darken-4"> Вышел из школы </td>
+                                            {% else %}
+                                                <td class = "red-text"> Отсутствует </td>
+                							{% endif %}
+
+                							{% if pupil.status == "present" or pupil.status == "leave" %}
+                								<td>{{pupil.arrive_time}}</td>
+                							{% else %}
+                								<td></td>
+                							{% endif %}
+
+                							{% if pupil.location == "urban" %}
+                								<td class = "blue-text"> Городской</td>
+                							{% elif pupil.location == "boarding" %}
+                								<td class = "brown-text"> Интернат</td>
+                							{% else %}
+                								<td class = "lime-text"> У родственников </td>
+                							{% endif %}
+
+                						</tr>
+                                    {% endif %}
+            					{% endfor %}
+            	        	</tbody>
+                		</table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class = "col s12">
+            <ul class="collapsible">
+
+                <li>
+                    <div class="collapsible-header">11 политехнический класс</div>
+
+                    <div class="collapsible-body">
+                        <table lass="striped">
+                	        <thead>
+                				<tr>
+                					<th>Имя</th>
+                					<th>Статус</th>
+                					<th>Время</th>
+                					<th>Проживает</th>
+                				</tr>
+                	        </thead>
+
+                            <tbody>
+            					{% for pupil in pupils_list%}
+                                    {% if pupil.grade == "11PTH" %}
+                						<tr>
+                							<td class = "">{{pupil.name}}</td>
+                							{% if pupil.status == "present" %}
+                								<td class = "green-text">Присутствует</td>
+                                            {% elif pupil.status == "leave" %}
+                                                <td class = "orange-text darken-4"> Вышел из школы </td>
+                                            {% else %}
+                                                <td class = "red-text"> Отсутствует </td>
+                							{% endif %}
+
+                							{% if pupil.status == "present" or pupil.status == "leave" %}
+                								<td>{{pupil.arrive_time}}</td>
+                							{% else %}
+                								<td></td>
+                							{% endif %}
+
+                							{% if pupil.location == "urban" %}
+                								<td class = "blue-text"> Городской</td>
+                							{% elif pupil.location == "boarding" %}
+                								<td class = "brown-text"> Интернат</td>
+                							{% else %}
+                								<td class = "lime-text"> У родственников </td>
+                							{% endif %}
+
+                						</tr>
+                                    {% endif %}
+            					{% endfor %}
+            	        	</tbody>
+                		</table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class = "col s12">
+            <ul class="collapsible">
+
+                <li>
+                    <div class="collapsible-header">11 технический класс </div>
+
+                    <div class="collapsible-body">
+                        <table lass="striped">
+                	        <thead>
+                				<tr>
+                					<th>Имя</th>
+                					<th>Статус</th>
+                					<th>Время</th>
+                					<th>Проживает</th>
+                				</tr>
+                	        </thead>
+
+                            <tbody>
+            					{% for pupil in pupils_list%}
+                                    {% if pupil.grade == "11TECH" %}
+                						<tr>
+                							<td class = "">{{pupil.name}}</td>
+                							{% if pupil.status == "present" %}
+                								<td class = "green-text">Присутствует</td>
+                                            {% elif pupil.status == "leave" %}
+                                                <td class = "orange-text darken-4"> Вышел из школы </td>
+                                            {% else %}
+                                                <td class = "red-text"> Отсутствует </td>
+                							{% endif %}
+
+                							{% if pupil.status == "present" or pupil.status == "leave" %}
+                								<td>{{pupil.arrive_time}}</td>
+                							{% else %}
+                								<td></td>
+                							{% endif %}
+
+                							{% if pupil.location == "urban" %}
+                								<td class = "blue-text"> Городской</td>
+                							{% elif pupil.location == "boarding" %}
+                								<td class = "brown-text"> Интернат</td>
+                							{% else %}
+                								<td class = "lime-text"> У родственников </td>
+                							{% endif %}
+
+                						</tr>
+                                    {% endif %}
+            					{% endfor %}
+            	        	</tbody>
+                		</table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class = "col s12">
+            <ul class="collapsible">
+
+                <li>
+                    <div class="collapsible-header">11 инженерный класс</div>
+
+                    <div class="collapsible-body">
+                        <table lass="striped">
+                	        <thead>
+                				<tr>
+                					<th>Имя</th>
+                					<th>Статус</th>
+                					<th>Время</th>
+                					<th>Проживает</th>
+                				</tr>
+                	        </thead>
+
+                            <tbody>
+            					{% for pupil in pupils_list%}
+                                    {% if pupil.grade == "11ENG" %}
+                						<tr>
+                							<td class = "">{{pupil.name}}</td>
+                							{% if pupil.status == "present" %}
+                								<td class = "green-text">Присутствует</td>
+                                            {% elif pupil.status == "leave" %}
+                                                <td class = "orange-text darken-4"> Вышел из школы </td>
+                                            {% else %}
+                                                <td class = "red-text"> Отсутствует </td>
+                							{% endif %}
+
+                							{% if pupil.status == "present" or pupil.status == "leave" %}
+                								<td>{{pupil.arrive_time}}</td>
+                							{% else %}
+                								<td></td>
+                							{% endif %}
+
+                							{% if pupil.location == "urban" %}
+                								<td class = "blue-text"> Городской</td>
+                							{% elif pupil.location == "boarding" %}
+                								<td class = "brown-text"> Интернат</td>
+                							{% else %}
+                								<td class = "lime-text"> У родственников </td>
+                							{% endif %}
+
+                						</tr>
+                                    {% endif %}
+            					{% endfor %}
+            	        	</tbody>
+                		</table>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class = "col s12">
+            <ul class="collapsible">
+
+                <li>
+                    <div class="collapsible-header">11 физико-математический класс</div>
+
+                    <div class="collapsible-body">
+                        <table lass="striped">
+                	        <thead>
+                				<tr>
+                					<th>Имя</th>
+                					<th>Статус</th>
+                					<th>Время</th>
+                					<th>Проживает</th>
+                				</tr>
+                	        </thead>
+
+                            <tbody>
+            					{% for pupil in pupils_list%}
+                                    {% if pupil.grade == "11FM" %}
+                						<tr>
+                							<td class = "">{{pupil.name}}</td>
+                							{% if pupil.status == "present" %}
+                								<td class = "green-text">Присутствует</td>
+                                            {% elif pupil.status == "leave" %}
+                                                <td class = "orange-text darken-4"> Вышел из школы </td>
+                                            {% else %}
+                                                <td class = "red-text"> Отсутствует </td>
+                							{% endif %}
+
+                							{% if pupil.status == "present" or pupil.status == "leave" %}
+                								<td>{{pupil.arrive_time}}</td>
+                							{% else %}
+                								<td></td>
+                							{% endif %}
+
+                							{% if pupil.location == "urban" %}
+                								<td class = "blue-text"> Городской</td>
+                							{% elif pupil.location == "boarding" %}
+                								<td class = "brown-text"> Интернат</td>
+                							{% else %}
+                								<td class = "lime-text"> У родственников </td>
+                							{% endif %}
+
                 						</tr>
                                     {% endif %}
             					{% endfor %}
