@@ -28,7 +28,7 @@ GRADE = (
 	("11PTH","11 политехнический класс"),
 	("11BCH","11 биолого-химический класс"),
 	("11HUM","11 гуманитарный класс"),
-	("10FM","10 физико-математический"),
+	("10FM","10 физико-математический"),	
 	("10ENG","10 инженерный класс"),
 	("10TECH","10 технический класс"),
 	("10PTH","10 политехнический класс"),
@@ -49,6 +49,7 @@ class Pupil(models.Model):
 	eating      = models.BooleanField(default = False)
 	inboard     = models.BooleanField(default = True)
 	status      = models.CharField(max_length = 50, default = "absent", choices = STATUS)
+	events      = []
 
 	arrive_time	   = models.TimeField('time arrive', null = True, blank = True)
 	photo     	   = models.ImageField(upload_to = "images/", default = "images/default.jpg")

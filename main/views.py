@@ -42,39 +42,48 @@ def information(request):
 
 
 def index(request):
-    context = {}
+	context = {}
 
-    if request.GET.get("qrcode") and request.GET.get("secret_word"):
-        get_secret_word = request.GET["secret_word"]
+	if request.GET.get("qrcode") and request.GET.get("secret_word"):
+		get_secret_word = request.GET["secret_word"]
 
-        if get_secret_word == secret_word:
-            qrcode = request.GET["qrcode"]
+		if get_secret_word == secret_word:
+			qrcode = request.GET["qrcode"]
 
-            pupil 			  = Pupil.objects.get(qrcode = qrcode)
+			pupil 			  = Pupil.objects.get(qrcode = qrcode)
+			date_time = str(datetime.now(tz = ykt_utc).date()) + " " + str(datetime.now(tz = ykt_utc).hour) + ":" + str(datetime.now(tz = ykt_utc).minute)
 
-            if request.GET["location"] == "board_enter":
+			if request.GET["location"] == "board_enter":
+				if pupil.inboard != True:
+					pupil.events.append(date_time + " пришел в интернат")
+				pupil.inboard = True
 
-                pupil.inboard = True
+			elif request.GET["location"] == "board_exit":
+				if pupil.inboard != False:
+					pupil.events.append(date_time + " вышел из интерната")
+				pupil.inboard = False
 
-            elif request.GET["location"] == "board_exit":
+			elif request.GET["location"] == "Canteen":
+				if pupil.eating != True:
+					pupil.events.append(date_time + " пришел в столовую")
+				pupil.eating = True
 
-                pupil.inboard = False
+			else:
+				if request.GET["location"] == "school_enter" and pupil.status != "present":
+					pupil.events.append(date_time + " пришел в школу")
+				elif request.GET["location"] == "school_exit" and pupil.status != "absent":
+					pupil.events.append(date_time + " вышел из школы")
 
-            elif request.GET["location"] == "Canteen":
-
-                pupil.eating = True
-
-            else:
-                pupil.status 	  = value[request.GET["location"]]
-                pupil.arrive_time =  datetime.now(tz = ykt_utc).time()
-
-
-            pupil.save()
+				pupil.status 	  = value[request.GET["location"]]
+				pupil.arrive_time =  datetime.now(tz = ykt_utc).time()
 
 
-    request = render(request, 'main/index.html', context)
+			pupil.save()
 
-    return request
+
+	request = render(request, 'main/index.html', context)
+
+	return request
 
 def monitoring(request):
     context = {}
