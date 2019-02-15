@@ -41,6 +41,24 @@ GRADE = (
 	("5","5"),
 )
 
+COLOR = (
+	("#8bc34a","Зеленый"),
+	("#f44336","Красный"),
+	("#cddc39","Лаймовый"),
+	("#ff9800","Оранжевый"),
+	("#2196f3","Синий"),
+)
+ 
+class Event(models.Model):
+	profile = models.ForeignKey('Pupil', on_delete = models.CASCADE, null = True, blank =True)
+	text    = models.CharField(max_length = 50)
+	color   = models.CharField(max_length = 20, choices = COLOR, blank = True)
+	time    = models.TimeField('event time')
+
+	def __str__(self):
+		return str(self.time) + " " + str(self.text)
+
+
 class Pupil(models.Model):
 	qrcode      = models.CharField(max_length = 50)
 	name        = models.CharField(max_length = 50)
@@ -49,7 +67,6 @@ class Pupil(models.Model):
 	eating      = models.BooleanField(default = False)
 	inboard     = models.BooleanField(default = True)
 	status      = models.CharField(max_length = 50, default = "absent", choices = STATUS)
-	events      = []
 
 	arrive_time	   = models.TimeField('time arrive', null = True, blank = True)
 	photo     	   = models.ImageField(upload_to = "images/", default = "images/default.jpg")

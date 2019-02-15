@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts 			import render, HttpResponseRedirect, redirect
-from .models					import Pupil, Order
+from .models					import Pupil, Order, Event
 from django.db 					import IntegrityError
 from django.core.paginator 		import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
@@ -51,32 +51,45 @@ def index(request):
 			qrcode = request.GET["qrcode"]
 
 			pupil 			  = Pupil.objects.get(qrcode = qrcode)
-			date_time = str(datetime.now(tz = ykt_utc).date()) + " " + str(datetime.now(tz = ykt_utc).hour) + ":" + str(datetime.now(tz = ykt_utc).minute)
+			time = datetime.now(tz = ykt_utc).time()
+			event = Event(time = time)
 
 			if request.GET["location"] == "board_enter":
 				if pupil.inboard != True:
-					pupil.events.append(date_time + " пришел в интернат")
+					event.text =  "пришел в интернат"
+					event.color = "#cddc39"
+
 				pupil.inboard = True
 
 			elif request.GET["location"] == "board_exit":
 				if pupil.inboard != False:
-					pupil.events.append(date_time + " вышел из интерната")
+					event.text  =  "вышел из интерната"
+					event.color = "#ff9800"
+
 				pupil.inboard = False
 
 			elif request.GET["location"] == "Canteen":
 				if pupil.eating != True:
-					pupil.events.append(date_time + " пришел в столовую")
+					event.text  = "пришел в столовую"
+					event.color = "#2196f3"
+
 				pupil.eating = True
 
 			else:
 				if request.GET["location"] == "school_enter" and pupil.status != "present":
-					pupil.events.append(date_time + " пришел в школу")
-				elif request.GET["location"] == "school_exit" and pupil.status != "absent":
-					pupil.events.append(date_time + " вышел из школы")
+					event.text  =  "пришел в школу"
+					event.color = "#8bc34a"
+
+				elif request.GET["location"] == "school_exit" and pupil.status == "present":
+					event.text =  "вышел из школы"
+					event.color = "#f44336"
 
 				pupil.status 	  = value[request.GET["location"]]
 				pupil.arrive_time =  datetime.now(tz = ykt_utc).time()
 
+			if event.text != "":
+				event.profile = pupil
+				event.save()
 
 			pupil.save()
 
@@ -147,6 +160,9 @@ def canteen(request):
 def profile(request, views_profile_id):
 	context = {}
 	profile = Pupil.objects.get(id = views_profile_id)
+	events  = Event.objects.filter(profile = profile)
+
+	context["events"]  = events
 	context["profile"] = profile
 
 	request = render(request, "main/profile.html", context)
