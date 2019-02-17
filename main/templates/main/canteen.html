@@ -2,9 +2,12 @@
 
 <div class = "container">
     <div class = "row">
-
-        <input class = "filter right col s4 offset-s8" placeholder="Фильтр" style = "background: white; border-radius: 40px; ">
-
+        
+        <span style="display: flex;">
+            <p class="left"> Поели {{eating_amt}}/{{pupils_amt}}</p>
+            <input class = "filter right col s4 offset-s8" placeholder="Фильтр" style = "background: white; border-radius: 40px; ">
+        </span>
+        
         {% for pupil in pupils %}
         <filtertag>
             <a href = "/profile/{{pupil.id}}">

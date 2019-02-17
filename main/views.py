@@ -22,10 +22,6 @@ value = {"school_enter":"present","school_exit":"leave"}
 
 secret_word = "axaxloleslivslomaesh"
 
-translate = {
-	"absent": "Отсуствует"
-}
-
 ykt_utc = timezone('Asia/Yakutsk')
 
 def information(request):
@@ -35,7 +31,9 @@ def information(request):
 	pupils_list = sorted(pupils, key = operator.attrgetter('grade','name'))
 
 	context["pupils"] = pupils_list
-	context["translate"] = translate
+	context["in_school"] = len(Pupil.objects.filter(status = "present"))
+	context["pupils_amt"] = len(pupils)
+
 	request = render(request, 'main/information.html', context)
 
 	return request
@@ -77,7 +75,7 @@ def index(request):
 
 			else:
 				if request.GET["location"] == "school_enter" and pupil.status != "present":
-					event.text  =  "пришел в школу"
+					event.text  = "пришел в школу"
 					event.color = "#8bc34a"
 
 				elif request.GET["location"] == "school_exit" and pupil.status == "present":
@@ -139,6 +137,8 @@ def board(request):
     pupils = Pupil.objects.filter(location = "boarding")
     pupils_list = sorted(pupils, key=operator.attrgetter('grade','name'))
 
+    context["in_board"] = len(Pupil.objects.filter(location = "boarding", inboard = True))
+    context["pupils_amt"] = len(pupils)
     context["pupils"] = pupils_list
 
     request = render(request, 'main/board.html', context)
@@ -152,6 +152,8 @@ def canteen(request):
     pupils_list = sorted(pupils, key=operator.attrgetter('grade','name'))
 
     context["pupils"] = pupils_list
+    context["eating_amt"] = len(Pupil.objects.filter(eating = True))
+    context["pupils_amt"] = len(pupils)
 
     request = render(request, 'main/canteen.html', context)
 
