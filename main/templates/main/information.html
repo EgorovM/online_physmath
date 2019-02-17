@@ -1,10 +1,12 @@
 {% include 'main/header.html' %}
 
 <div class = "container">
+    
     <div class = "row">
-
-        <input class = "filter right col s4 offset-s8" placeholder="Фильтр" style = "background: white; border-radius: 40px; ">
-
+        <span style="display: flex;">
+            <p class="left"> В школе всего {{in_school}}/{{pupils_amt}}</p>
+            <input class = "filter right col s4 offset-s8" placeholder="Фильтр" style = "background: white; border-radius: 40px; ">
+        </span>
         {% for pupil in pupils %}
         <filtertag>
             <a href = "/profile/{{pupil.id}}">
@@ -15,9 +17,11 @@
                         <p> 
                             {% if pupil.status == "present" %}
                                 <font class = "green-text">Присутствует</font>
-                            {% else %}
+                            {% elif pupil.status == "leave" %}
+                                <font class = "orange-text">Вышел из школы</font>
+                            {% else %} 
                                 <font class = "red-text">Отсутствует</font>
-                            {% endif %} <br>
+                            {% endif %}<br>
                             <font class = "brown-text" >{{ pupil.grade }} </font>
                         </p>
                     </li>

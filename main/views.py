@@ -31,7 +31,9 @@ def information(request):
 	pupils_list = sorted(pupils, key = operator.attrgetter('grade','name'))
 
 	context["pupils"] = pupils_list
-	context["translate"] = translate
+	context["in_school"] = len(Pupil.objects.filter(status = "present"))
+	context["pupils_amt"] = len(pupils)
+
 	request = render(request, 'main/information.html', context)
 
 	return request
@@ -135,6 +137,8 @@ def board(request):
     pupils = Pupil.objects.filter(location = "boarding")
     pupils_list = sorted(pupils, key=operator.attrgetter('grade','name'))
 
+    context["in_board"] = len(Pupil.objects.filter(location = "boarding", inboard = True))
+    context["pupils_amt"] = len(pupils)
     context["pupils"] = pupils_list
 
     request = render(request, 'main/board.html', context)
@@ -148,6 +152,8 @@ def canteen(request):
     pupils_list = sorted(pupils, key=operator.attrgetter('grade','name'))
 
     context["pupils"] = pupils_list
+    context["eating_amt"] = len(Pupil.objects.filter(eating = True))
+    context["pupils_amt"] = len(pupils)
 
     request = render(request, 'main/canteen.html', context)
 
