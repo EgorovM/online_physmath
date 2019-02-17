@@ -22,10 +22,6 @@ value = {"school_enter":"present","school_exit":"leave"}
 
 secret_word = "axaxloleslivslomaesh"
 
-translate = {
-	"absent": "Отсуствует"
-}
-
 ykt_utc = timezone('Asia/Yakutsk')
 
 def information(request):
@@ -77,7 +73,7 @@ def index(request):
 
 			else:
 				if request.GET["location"] == "school_enter" and pupil.status != "present":
-					event.text  =  "пришел в школу"
+					event.text  = "пришел в школу"
 					event.color = "#8bc34a"
 
 				elif request.GET["location"] == "school_exit" and pupil.status == "present":
