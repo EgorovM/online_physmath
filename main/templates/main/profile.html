@@ -4,10 +4,35 @@
     <div class="row">
         <div class="col s8 m4 offset-m4 offset-s2">
             <div class="card">
-                <div class="card-image">
-                  <img src="/media/{{profile.photo}}" style="border-radius: 10px"> 
-                  <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">favorite</i></a>
+                <div class="card-content">
+                    {% if is_admin %}
+                        <form action="." method="post">
+                            {% csrf_token %} 
+                            <div style="display: flex; justify-content: space-between;">
+                                <button type="submit" name="enter" class="btn-floating  waves-effect waves-light green"><i class="material-icons">check</i></button>
+                                 
+                                <button type="submit" name="eating" class="btn-floating  waves-effect waves-light blue"><i class="material-icons">restaurant</i></button> 
+                                
+                                <button type="submit" name="exit" class="btn-floating waves-effect waves-light red"><i class="material-icons">clear</i></button>
+                                
+                            </div>
+                        </form>
+                    {% endif %}
                 </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image">
+                    <img src="/media/{{profile.photo}}" style="border-radius: 10px">
+                    <a class="btn-floating btn-medium halfway-fab waves-effect waves-light">
+                        {% if profile.status == "present" %}
+                            <i class="material-icons green">add</i>
+                        {% else %}
+                            <i class="material-icons red">close</i>
+                        {% endif %}
+                    </a> 
+                </div>
+
                 <div class="card-content">
                     <h5 class = "center">{{profile.name}}</h5>
                     <br>
@@ -24,9 +49,10 @@
                             {{profile.location}}
                         </p>
                     </div>
+                    <br>
                 </div>
             </div>
-            
+
             <div class="card">
                 <div class="card-content">
                     <h6>История проверок:</h6>

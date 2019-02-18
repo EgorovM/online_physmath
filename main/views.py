@@ -109,26 +109,26 @@ def monitoring(request):
     return request
 
 def about(request):
-    context = {}
+	context = {}
 
-    if request.method == "POST":
-        if "ok_button" in request.POST:
-            email   = request.POST["email"]
-            school  = request.POST["school"]
-            message = request.POST["message"]
+	if request.method == "POST":
+		if "ok_button" in request.POST:
+			email   = request.POST["email"]
+			school  = request.POST["school"]
+			message = request.POST["message"]
 
-            order = Order()
+			order = Order()
 
-            order.email = email
-            order.school_name = school
-            order.message = message
-            order.date = datetime.now(tz = ykt_utc)
+			order.email = email
+			order.school_name = school
+			order.message = message
+			order.date = datetime.now(tz = ykt_utc)
 
-            order.save()
+			order.save()
 
-    request = render(request, 'main/about.html')
+	request = render(request, 'main/about.html')
 
-    return request
+	return request
 
 
 def board(request):
@@ -161,8 +161,36 @@ def canteen(request):
 
 def profile(request, views_profile_id):
 	context = {}
+	context["is_admin"] = False
+
+	if request.user.is_authenticated():
+		context["is_admin"] = True
+
+
 	profile = Pupil.objects.get(id = views_profile_id)
 	events  = Event.objects.filter(profile = profile)
+
+	if request.method == "POST":
+		event = Event(profile = profile)
+
+		if "enter" in request.POST:
+			profile.status = "present"
+			event.text = "пришел в школу"
+			event.color = "#8bc34a"
+		elif "eating" in request.POST:
+			profile.eating = True
+			event.text = "пришел в столовую"
+			event.color = "#2196f3"
+		elif "exit" in request.POST:
+			profile.status = "absent"
+			event.text = "вышел из школы"
+			event.color = "#f44336"
+
+		event.time = datetime.now(tz = ykt_utc).time()
+		profile.arrive_time =  datetime.now(tz = ykt_utc).time()
+
+		profile.save()
+		event.save()
 
 	context["events"]  = events
 	context["profile"] = profile
@@ -173,6 +201,7 @@ def profile(request, views_profile_id):
 
 def refresh(request):
 	pupils = Pupil.objects.all()
+	Event.objects.all().delete()
 
 	for pupil in pupils:
 		if pupil.status == "absent":
