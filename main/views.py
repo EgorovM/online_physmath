@@ -50,6 +50,10 @@ def index(request):
 
 			pupil = Pupil.objects.get(index = get_index)
 			time = datetime.now(tz = ykt_utc).time()
+
+			if request.GET["location"] != "school_canteen":
+				pupil.arrive_time =  time
+
 			event = Event(time = time)
 
 			if request.GET["location"] == "school_enter":
@@ -62,11 +66,6 @@ def index(request):
 					event.color = "#f44336"
 					pupil.status = "leave"
 
-			elif request.GET["location"] == "school_canteen":
-				event.text = "пришел в столовую"
-				event.color = "#2196f3"
-				pupil.eating = True
-
 			elif request.GET["location"] == "board_enter":
 				if pupil.inboard == False:
 					event.text = "пришел в интернат"
@@ -77,6 +76,11 @@ def index(request):
 					event.color = "#ff9800"
 					pupil.inboard = False
 
+			elif request.GET["location"] == "school_canteen":
+				event.text = "пришел в столовую"
+				event.color = "#2196f3"
+				pupil.eating = True
+				
 			if event.text != "":
 				event.profile = pupil
 				event.save()
