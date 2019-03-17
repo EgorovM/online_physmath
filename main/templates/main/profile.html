@@ -7,14 +7,14 @@
                 <div class="card">
                     <div class="card-content">
                         <form action="." method="post">
-                            {% csrf_token %} 
+                            {% csrf_token %}
                             <div style="display: flex; justify-content: space-between;">
                                 <button type="submit" name="enter" class="btn-floating  waves-effect waves-light green"><i class="material-icons">check</i></button>
-                                 
-                                <button type="submit" name="eating" class="btn-floating  waves-effect waves-light blue"><i class="material-icons">restaurant</i></button> 
-                                
+
+                                <button type="submit" name="eating" class="btn-floating  waves-effect waves-light blue"><i class="material-icons">restaurant</i></button>
+
                                 <button type="submit" name="exit" class="btn-floating waves-effect waves-light red"><i class="material-icons">clear</i></button>
-                                
+
                             </div>
                         </form>
                     </div>
@@ -30,11 +30,15 @@
                         {% else %}
                             <i class="material-icons red">close</i>
                         {% endif %}
-                    </a> 
+                    </a>
                 </div>
 
                 <div class="card-content">
-                    <h5 class = "center">{{profile.name}}</h5>
+                    {% if profile.id == 138 %}
+                            <h5 class="center purple-text">{{ profile.name }}</h5>
+                        {% else %}
+                            <h5 class="center black-text">{{ profile.name }}</h5>
+                        {% endif %}
                     <br>
                     <div style="display: flex; justify-content: space-around;" class = "center">
                         <p> <font class="grey-text">Класс</font><br>
