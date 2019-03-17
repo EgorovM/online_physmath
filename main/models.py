@@ -28,7 +28,7 @@ GRADE = (
 	("11PTH","11 политехнический класс"),
 	("11BCH","11 биолого-химический класс"),
 	("11HUM","11 гуманитарный класс"),
-	("10FM","10 физико-математический"),	
+	("10FM","10 физико-математический"),
 	("10ENG","10 инженерный класс"),
 	("10TECH","10 технический класс"),
 	("10PTH","10 политехнический класс"),
@@ -48,7 +48,7 @@ COLOR = (
 	("#ff9800","Оранжевый"),
 	("#2196f3","Синий"),
 )
- 
+
 class Event(models.Model):
 	profile = models.ForeignKey('Pupil', on_delete = models.CASCADE, null = True, blank =True)
 	text    = models.CharField(max_length = 50)
@@ -60,20 +60,21 @@ class Event(models.Model):
 
 
 class Pupil(models.Model):
-	qrcode      = models.CharField(max_length = 50)
-	name        = models.CharField(max_length = 50)
-	grade       = models.CharField(max_length = 50, choices = GRADE)
-	location    = models.CharField(max_length = 50, choices = LOCATION)
-	eating      = models.BooleanField(default = False)
-	inboard     = models.BooleanField(default = True)
-	status      = models.CharField(max_length = 50, default = "absent", choices = STATUS)
+    index       = models.CharField(max_length = 50)
+    qrcode      = models.CharField(max_length = 50)
+    name        = models.CharField(max_length = 50)
+    grade       = models.CharField(max_length = 50, choices = GRADE)
+    location    = models.CharField(max_length = 50, choices = LOCATION)
+    eating      = models.BooleanField(default = False)
+    inboard     = models.BooleanField(default = True)
+    status      = models.CharField(max_length = 50, default = "absent", choices = STATUS)
 
-	arrive_time	   = models.TimeField('time arrive', null = True, blank = True)
-	photo     	   = models.ImageField(upload_to = "images/", default = "images/default.jpg")
-	non_attendance = models.IntegerField(default = 0);
+    arrive_time	   = models.TimeField('time arrive', null = True, blank = True)
+    photo     	   = models.ImageField(upload_to = "images/", default = "images/default.jpg")
+    non_attendance = models.IntegerField(default = 0);
 
-	def __str__(self):
-		return str(self.qrcode)
+    def __str__(self):
+    	return str(self.qrcode)
 
 class Order(models.Model):
 	email       = models.CharField(max_length = 70)
