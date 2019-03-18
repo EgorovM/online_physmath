@@ -253,7 +253,7 @@ def mark(request):
 		get_index =  request.GET["get_profile"]
 
 		profile = Pupil.objects.values('index', 'name', 'grade', 'photo').filter(index = get_index)
-		return JsonResponse({'profile': list(profile)[0]})
+		return JsonResponse({'profile': list(profile)})
 
 
 	else:
