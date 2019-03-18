@@ -80,7 +80,7 @@ def index(request):
 				event.text = "пришел в столовую"
 				event.color = "#2196f3"
 				pupil.eating = True
-				
+
 			if event.text != "":
 				event.profile = pupil
 				event.save()
@@ -245,15 +245,16 @@ def profile(request, views_profile_id):
 	return request
 
 def refresh(request):
-	pupils = Pupil.objects.all()
-	Event.objects.all().delete()
+	if request.user.is_authenticated():
+		pupils = Pupil.objects.all()
+		Event.objects.all().delete()
 
-	for pupil in pupils:
-		if pupil.status == "absent":
-			pupil.non_attendance += 1
+		for pupil in pupils:
+			if pupil.status == "absent":
+				pupil.non_attendance += 1
 
-		pupil.status = "absent"
+			pupil.status = "absent"
 
-		pupil.save()
+			pupil.save()
 
-	return redirect('/')
+		return redirect('/')
