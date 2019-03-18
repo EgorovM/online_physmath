@@ -257,4 +257,4 @@ def refresh(request):
 
 			pupil.save()
 
-	return redirect('/')
+	return HttpResponseRedirect('/')
