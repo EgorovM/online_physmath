@@ -11,7 +11,8 @@ urlpatterns = [
     url(r'^refresh/$',                              views.refresh,     name = 'refresh'),
     url(r'^profile/(?P<views_profile_id>[0-9]+)/$', views.profile,     name = 'profile'),
     url(r'^board/$',                                views.board,       name = 'board'),
-    url(r'^canteen/$',                              views.canteen,     name = 'board'),
+    url(r'^canteen/$',                              views.canteen,     name = 'canteen'),
+    url(r'^mark/$',                                 views.mark,        name = 'mark'),
 
     # url(r'^(?P<order_id>[0-9]+)/$', views.order, name='order'),
     # url(r'^login/$', views.login, name = 'login'),
