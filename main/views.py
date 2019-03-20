@@ -150,119 +150,116 @@ def profile(request, views_profile_id):
 	return request
 
 def mark(request):
-	get_index = "11fm_1"
+    get_index = "11fm_1"
 
-	if request.GET.get("index") and request.GET.get("secret_word"):
-		get_secret_word = request.GET["secret_word"]
+    if request.GET.get("index") and request.GET.get("secret_word"):
+        get_secret_word = request.GET["secret_word"]
 
+        if get_secret_word == secret_word:
+            get_index = request.GET["index"]
 
-		if get_secret_word == secret_word:
-			get_index = request.GET["index"]
+            pupil = Pupil.objects.get(index = get_index)
+            time = datetime.now(tz = ykt_utc).time()
 
-			pupil = Pupil.objects.get(index = get_index)
-			time = datetime.now(tz = ykt_utc).time()
+            if request.GET["location"] != "school_canteen":
+                pupil.arrive_time =  time
 
-			if request.GET["location"] != "school_canteen":
-				pupil.arrive_time =  time
+                event = Event(time = time)
 
-			event = Event(time = time)
+            if request.GET["location"] == "school_enter":
+                if pupil.status != "present":
+                    event.text = "пришел в школу"
+                    event.color = "#8bc34a"
+                    pupil.status = "present"
+                else:
+                    event.text = "вышел из школы"
+                    event.color = "#f44336"
+                    pupil.status = "leave"
 
-			if request.GET["location"] == "school_enter":
-				if pupil.status != "present":
-					event.text = "пришел в школу"
-					event.color = "#8bc34a"
-					pupil.status = "present"
-				else:
-					event.text = "вышел из школы"
-					event.color = "#f44336"
-					pupil.status = "leave"
+            elif request.GET["location"] == "board_enter":
+                if pupil.inboard == False:
+                    event.text = "пришел в интернат"
+                    event.color =  event.color = "#cddc39"
+                    pupil.inboard = True
+                else:
+                    event.text = "вышел из интерната"
+                    event.color = "#ff9800"
+                    pupil.inboard = False
 
-			elif request.GET["location"] == "board_enter":
-				if pupil.inboard == False:
-					event.text = "пришел в интернат"
-					event.color =  event.color = "#cddc39"
-					pupil.inboard = True
-				else:
-					event.text = "вышел из интерната"
-					event.color = "#ff9800"
-					pupil.inboard = False
+            elif request.GET["location"] == "school_canteen":
+                event.text = "пришел в столовую"
+                event.color = "#2196f3"
+                pupil.eating = True
 
-			elif request.GET["location"] == "school_canteen":
-				event.text = "пришел в столовую"
-				event.color = "#2196f3"
-				pupil.eating = True
+            if event.text != "":
+                event.profile = pupil
+                event.save()
 
-			if event.text != "":
-				event.profile = pupil
-				event.save()
+            pupil.save()
 
-			pupil.save()
+    elif request.GET.get("qrcode") and request.GET.get("secret_word"):
+        get_secret_word = request.GET["secret_word"]
 
-	elif request.GET.get("qrcode") and request.GET.get("secret_word"):
-		get_secret_word = request.GET["secret_word"]
+        if get_secret_word == secret_word:
+            qrcode = request.GET["qrcode"]
 
-		if get_secret_word == secret_word:
-			qrcode = request.GET["qrcode"]
+            pupil 			  = Pupil.objects.get(qrcode = qrcode)
+            time = datetime.now(tz = ykt_utc).time()
+            event = Event(time = time)
 
-			pupil 			  = Pupil.objects.get(qrcode = qrcode)
-			time = datetime.now(tz = ykt_utc).time()
-			event = Event(time = time)
+            if request.GET["location"] == "board_enter":
+                if pupil.inboard != True:
+                    event.text =  "пришел в интернат"
+                    event.color = "#cddc39"
 
-			if request.GET["location"] == "board_enter":
-				if pupil.inboard != True:
-					event.text =  "пришел в интернат"
-					event.color = "#cddc39"
+            pupil.inboard = True
 
-				pupil.inboard = True
+        elif request.GET["location"] == "board_exit":
+            if pupil.inboard != False:
+                event.text  =  "вышел из интерната"
+                event.color = "#ff9800"
 
-			elif request.GET["location"] == "board_exit":
-				if pupil.inboard != False:
-					event.text  =  "вышел из интерната"
-					event.color = "#ff9800"
+            pupil.inboard = False
 
-				pupil.inboard = False
+        elif request.GET["location"] == "Canteen":
+            if pupil.eating != True:
+                event.text  = "пришел в столовую"
+                event.color = "#2196f3"
 
-			elif request.GET["location"] == "Canteen":
-				if pupil.eating != True:
-					event.text  = "пришел в столовую"
-					event.color = "#2196f3"
+            pupil.eating = True
 
-				pupil.eating = True
+        else:
+            if request.GET["location"] == "school_enter" and pupil.status != "present":
+                event.text  = "пришел в школу"
+                event.color = "#8bc34a"
 
-			else:
-				if request.GET["location"] == "school_enter" and pupil.status != "present":
-					event.text  = "пришел в школу"
-					event.color = "#8bc34a"
+            elif request.GET["location"] == "school_exit" and pupil.status == "present":
+                event.text =  "вышел из школы"
+                event.color = "#f44336"
 
-				elif request.GET["location"] == "school_exit" and pupil.status == "present":
-					event.text =  "вышел из школы"
-					event.color = "#f44336"
+            pupil.status 	  = value[request.GET["location"]]
+            pupil.arrive_time =  datetime.now(tz = ykt_utc).time()
 
-				pupil.status 	  = value[request.GET["location"]]
-				pupil.arrive_time =  datetime.now(tz = ykt_utc).time()
+            if event.text != "":
+                event.profile = pupil
+                event.save()
 
-			if event.text != "":
-				event.profile = pupil
-				event.save()
+            pupil.save()
 
-			pupil.save()
+    elif request.GET.get("get_profile") and request.GET.get("secret_word"):
+        get_secret_word = request.GET["secret_word"]
+        get_index =  request.GET["get_profile"]
 
+        if get_secret_word == secret_word:
+            if not Pupil.objects.filter(index=get_index).exists():
+                return JsonResponse({"profile": [{"status":False}]})
+            else:
+                profile = Pupil.objects.values('index', 'name', 'grade', 'photo').filter(index = get_index)
 
-	elif request.GET.get("get_profile") and request.GET.get("secret_word"):
-		get_secret_word = request.GET["secret_word"]
-		get_index =  request.GET["get_profile"]
+            return JsonResponse({'profile': [{'status':True}]+ list(profile)})
 
-		if get_secret_word == secret_word:
-			if not Pupil.objects.filter(index=get_index).exists():
-				return JsonResponse({"profile": [{"status":False}]})
-			else:
-				profile = Pupil.objects.values('index', 'name', 'grade', 'photo').filter(index = get_index)
-
-		return JsonResponse({'profile': [{'status':True}]+ list(profile)})
-
-
-	else:
-		return HttpResponseRedirect("/")
+    else:
+        return HttpResponseRedirect("/")
 
 
 
