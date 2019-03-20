@@ -252,8 +252,13 @@ def mark(request):
 		get_secret_word = request.GET["secret_word"]
 		get_index =  request.GET["get_profile"]
 
-		profile = Pupil.objects.values('index', 'name', 'grade', 'photo').filter(index = get_index)
-		return JsonResponse({'profile': list(profile)})
+		if get_secret_word == secret_word:
+			if not Pupil.objects.filter(index=get_index).exists():
+				return JsonResponse({"profile": [{"status":False}]})
+			else:
+				profile = Pupil.objects.values('index', 'name', 'grade', 'photo').filter(index = get_index)
+
+		return JsonResponse({'profile': [{'status':True}]+ list(profile)})
 
 
 	else:
