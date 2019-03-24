@@ -52,7 +52,7 @@ COLOR = (
 
 class Day(models.Model):
 	date  = models.DateField('date')
-	pupil = models.ManyToManyField('Pupil')
+	pupil = models.ManyToManyField('Pupil', null = True, blank = True)
 
 
 	def __str__(self):
