@@ -335,17 +335,19 @@ def get_attendance_list(request):
     return response;
 
 def refresh(request):
-	if request.user.is_authenticated():
-		pupils = Pupil.objects.all()
-		Event.objects.all().delete()
+    day = Day.objects.create(date = datetime.now(tz = ykt_utc))
 
-		for pupil in pupils:
-			if pupil.status == "absent":
-				pupil.non_attendance += 1
+    if request.user.is_authenticated():
+        pupils = Pupil.objects.all()
+        Event.objects.all().delete()
 
-			pupil.status = "absent"
+        for pupil in pupils:
+            if pupil.status == "absent":
+                pupil.non_attendance += 1
 
-			pupil.save()
+            pupil.status = "absent"
 
-	return HttpResponseRedirect('/')
+            pupil.save()
+
+    return HttpResponseRedirect('/')
 
