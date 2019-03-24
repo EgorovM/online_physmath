@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts 			import render, HttpResponseRedirect, redirect
-from .models					import Pupil, Order, Event
+from .models					import Pupil, Order, Event, Day
 from django.db 					import IntegrityError
 from django.core.paginator 		import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
@@ -150,7 +150,7 @@ def profile(request, views_profile_id):
 	return request
 
 def mark(request):
-    get_index = "11fm_1"
+    get_index = "-1"
 
     if request.GET.get("index") and request.GET.get("secret_word"):
         get_secret_word = request.GET["secret_word"]
@@ -158,19 +158,26 @@ def mark(request):
         if get_secret_word == secret_word:
             get_index = request.GET["index"]
 
-            pupil = Pupil.objects.get(index = get_index)
-            time = datetime.now(tz = ykt_utc).time()
+            pupil      = Pupil.objects.get(index = get_index)
+            day        = datetime.now(tz = ykt_utc)
+            Attendance = Day.objects.get(date = day)
+            time       = day.time()
 
             if request.GET["location"] != "school_canteen":
                 pupil.arrive_time =  time
-
                 event = Event(time = time)
 
             if request.GET["location"] == "school_enter":
                 if pupil.status != "present":
+                    if not pupil in Attendance.pupil.get_queryset():
+                        print("if1")
+                        Attendance.pupil.add(pupil)
+                        Attendance.save()
+
                     event.text = "пришел в школу"
                     event.color = "#8bc34a"
                     pupil.status = "present"
+                    print("if2")
                 else:
                     event.text = "вышел из школы"
                     event.color = "#f44336"
@@ -201,10 +208,13 @@ def mark(request):
         get_secret_word = request.GET["secret_word"]
 
         if get_secret_word == secret_word:
+
             qrcode = request.GET["qrcode"]
 
             pupil 			  = Pupil.objects.get(qrcode = qrcode)
-            time = datetime.now(tz = ykt_utc).time()
+            day        = datetime.now(tz = ykt_utc)
+            Attendance = Day.objects.get(date = day)
+            time       = day.time()
             event = Event(time = time)
 
             if request.GET["location"] == "board_enter":
@@ -212,39 +222,42 @@ def mark(request):
                     event.text =  "пришел в интернат"
                     event.color = "#cddc39"
 
-            pupil.inboard = True
+                pupil.inboard = True
 
-        elif request.GET["location"] == "board_exit":
-            if pupil.inboard != False:
-                event.text  =  "вышел из интерната"
-                event.color = "#ff9800"
+            elif request.GET["location"] == "board_exit":
+                if pupil.inboard != False:
+                    event.text  =  "вышел из интерната"
+                    event.color = "#ff9800"
 
-            pupil.inboard = False
+                pupil.inboard = False
 
-        elif request.GET["location"] == "Canteen":
-            if pupil.eating != True:
-                event.text  = "пришел в столовую"
-                event.color = "#2196f3"
+            elif request.GET["location"] == "Canteen":
+                if pupil.eating != True:
+                    event.text  = "пришел в столовую"
+                    event.color = "#2196f3"
 
-            pupil.eating = True
+                pupil.eating = True
 
-        else:
-            if request.GET["location"] == "school_enter" and pupil.status != "present":
-                event.text  = "пришел в школу"
-                event.color = "#8bc34a"
+            else:
+                if request.GET["location"] == "school_enter" and pupil.status != "present":
+                    if not pupil in Attendance.pupil.get_queryset():
+                        Attendance.pupil.add(pupil)
+                        Attendance.save()
+                    event.text  = "пришел в школу"
+                    event.color = "#8bc34a"
 
-            elif request.GET["location"] == "school_exit" and pupil.status == "present":
-                event.text =  "вышел из школы"
-                event.color = "#f44336"
+                elif request.GET["location"] == "school_exit" and pupil.status == "present":
+                    event.text =  "вышел из школы"
+                    event.color = "#f44336"
 
-            pupil.status 	  = value[request.GET["location"]]
-            pupil.arrive_time =  datetime.now(tz = ykt_utc).time()
+                pupil.status 	  = value[request.GET["location"]]
+                pupil.arrive_time =  datetime.now(tz = ykt_utc).time()
 
-            if event.text != "":
-                event.profile = pupil
-                event.save()
+                if event.text != "":
+                    event.profile = pupil
+                    event.save()
 
-            pupil.save()
+                pupil.save()
 
     elif request.GET.get("get_profile") and request.GET.get("secret_word"):
         get_secret_word = request.GET["secret_word"]
@@ -258,8 +271,7 @@ def mark(request):
 
             return JsonResponse({'profile': list(profile)})
 
-    else:
-        return HttpResponseRedirect("/")
+    return HttpResponseRedirect("/")
 
 
 

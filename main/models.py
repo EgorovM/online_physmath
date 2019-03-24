@@ -49,6 +49,16 @@ COLOR = (
 	("#2196f3","Синий"),
 )
 
+
+class Day(models.Model):
+	date  = models.DateField('date')
+	pupil = models.ManyToManyField('Pupil')
+
+
+	def __str__(self):
+		return str(self.date)
+
+
 class Event(models.Model):
 	profile = models.ForeignKey('Pupil', on_delete = models.CASCADE, null = True, blank =True)
 	text    = models.CharField(max_length = 50)
@@ -80,7 +90,7 @@ class Order(models.Model):
 	email       = models.CharField(max_length = 70)
 	school_name = models.CharField(max_length = 100)
 	message     = models.CharField(max_length = 300)
-	date        = models.DateTimeField('order date',)
+	date        = models.DateField('order date')
 
 	def __str__(self):
 		return str(self.school_name)
