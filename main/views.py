@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts 			import render, HttpResponseRedirect, redirect
+from django.shortcuts 			import render, HttpResponseRedirect, redirect, HttpResponse
 from .models					import Pupil, Order, Event, Day
 from django.db 					import IntegrityError
 from django.core.paginator 		import Paginator, EmptyPage, PageNotAnInteger
@@ -12,11 +12,16 @@ from PIL      					import Image
 from pytz 						import timezone
 from datetime 					import datetime, timedelta
 from django.http 				import JsonResponse
-import pytz
-import json
-import operator
 from io import StringIO
+import pandas as pd
+import mimetypes
 import threading
+import operator
+import sqlite3
+import json
+import pytz
+import os
+
 
 value = {"school_enter":"present","school_exit":"leave"}
 
@@ -40,11 +45,14 @@ def information(request):
 
 
 def index(request):
-	context = {}
+    context = {}
 
-	request = render(request, 'main/index.html', context)
+    if request.user.is_authenticated():
+        context["is_auth"] = True
 
-	return request
+    request = render(request, 'main/index.html', context)
+
+    return request
 
 def monitoring(request):
     context = {}
@@ -275,6 +283,57 @@ def mark(request):
 
 
 
+def get_attendance_list(request):
+    d = {"pupil":[], "grade":[], "location":[],}
+
+
+    conn = sqlite3.connect('db.sqlite3')
+    cursor = conn.cursor()
+
+    day        = cursor.execute('SELECT * FROM main_day') #0 - index, #2 - date
+
+    for row in day:
+        d[row[0]] = []
+
+    for row in cursor.execute('SELECT * FROM main_pupil'):
+        d["pupil"].append(row[2])
+        d["grade"].append(row[3])
+        d["location"].append(row[4])
+
+    day = cursor.execute('SELECT * FROM main_day') #0 - index, #2 - date
+
+    for row in day:
+        for i in range(len(d["pupil"])):
+            d[row[0]].append(0)
+        
+    for row in cursor.execute('SELECT * FROM main_day_pupil'):
+        d[row[1]][row[2]-1] = 1
+
+    data = pd.DataFrame(data = d)
+
+    for row in cursor.execute('SELECT * FROM main_day'):
+        data[row[1]] = data[row[0]]
+        del data[row[0]]
+
+    data.to_excel("Посещаемость в школе.xlsx",index = False)
+
+    excel_file_name = "Посещаемость в школе.xlsx"
+
+    fp = open(excel_file_name, "rb");
+    response = HttpResponse(fp.read());
+    fp.close();
+    
+    file_type = mimetypes.guess_type(excel_file_name);
+
+    if file_type is None:
+        file_type = 'application/octet-stream';
+    
+    response['Content-Type'] = file_type
+    response['Content-Length'] = str(os.stat(excel_file_name).st_size);
+    response['Content-Disposition'] = "attachment; filename=Attendance.xlsx";
+
+    return response;
+
 def refresh(request):
 	if request.user.is_authenticated():
 		pupils = Pupil.objects.all()
@@ -289,3 +348,4 @@ def refresh(request):
 			pupil.save()
 
 	return HttpResponseRedirect('/')
+

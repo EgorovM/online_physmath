@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^board/$',                                views.board,       name = 'board'),
     url(r'^canteen/$',                              views.canteen,     name = 'canteen'),
     url(r'^mark/$',                                 views.mark,        name = 'mark'),
-
+    url(r'^get_attendance_list/$',                  views.get_attendance_list,        name = 'att_list')
     # url(r'^(?P<order_id>[0-9]+)/$', views.order, name='order'),
     # url(r'^login/$', views.login, name = 'login'),
     # url(r'^logout/$', views.logout, name = 'logout'),
