@@ -335,9 +335,9 @@ def get_attendance_list(request):
     return response;
 
 def refresh(request):
-    day = Day.objects.create(date = datetime.now(tz = ykt_utc))
-
     if request.user.is_authenticated():
+        day = Day.objects.create(date = datetime.now(tz = ykt_utc))
+        
         pupils = Pupil.objects.all()
         Event.objects.all().delete()
 
