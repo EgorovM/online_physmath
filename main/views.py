@@ -287,7 +287,7 @@ def get_attendance_list(request):
     d = {"pupil":[], "grade":[], "location":[],}
 
 
-    conn = sqlite3.connect('db.sqlite3')
+    conn = sqlite3.connect('/home/EgorovM/online_physmath/db.sqlite3')
     cursor = conn.cursor()
 
     day        = cursor.execute('SELECT * FROM main_day') #0 - index, #2 - date
@@ -300,12 +300,12 @@ def get_attendance_list(request):
         d["grade"].append(row[3])
         d["location"].append(row[4])
 
-    day = cursor.execute('SELECT * FROM main_day') #0 - index, #2 - date
+    day = cursor.execute('SELECT * FROM main_day')
 
     for row in day:
         for i in range(len(d["pupil"])):
             d[row[0]].append(0)
-        
+
     for row in cursor.execute('SELECT * FROM main_day_pupil'):
         d[row[1]][row[2]-1] = 1
 
@@ -322,12 +322,12 @@ def get_attendance_list(request):
     fp = open(excel_file_name, "rb");
     response = HttpResponse(fp.read());
     fp.close();
-    
+
     file_type = mimetypes.guess_type(excel_file_name);
 
     if file_type is None:
         file_type = 'application/octet-stream';
-    
+
     response['Content-Type'] = file_type
     response['Content-Length'] = str(os.stat(excel_file_name).st_size);
     response['Content-Disposition'] = "attachment; filename=Attendance.xlsx";
