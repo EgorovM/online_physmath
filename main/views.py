@@ -336,7 +336,7 @@ def get_attendance_list(request):
 
 def refresh(request):
     if request.user.is_authenticated() or (request.GET.get("secret_word") and request.GET["secret_word"] == secret_word):
-        day = Day.objects.create(date = datetime.now(tz = ykt_utc))
+        day = Day.objects.create(date = (datetime.now(tz = ykt_utc) + timedelta(days = 1)))
         
         pupils = Pupil.objects.all()
         Event.objects.all().delete()
