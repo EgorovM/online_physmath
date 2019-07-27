@@ -45,7 +45,7 @@ for (var attr in meta) {
   window.ShopifyAnalytics.meta[attr] = meta[attr];
 }</script>
 <script>window.ShopifyAnalytics.merchantGoogleAnalytics = function() {
-  
+
 };
 </script>
 <script class="analytics">(window.gaDevIds=window.gaDevIds||[]).push('BwiEti');
@@ -112,7 +112,7 @@ for (var attr in meta) {
     loaded = true;
 
     window.ShopifyAnalytics.lib = window.trekkie;
-    
+
       ga('require', 'linker');
       function addListener(element, type, callback) {
         if (element.addEventListener) {
@@ -146,28 +146,28 @@ for (var attr in meta) {
           }
         }
       });
-    
+
 
     var originalDocumentWrite = document.write;
     document.write = customDocumentWrite;
     try { window.ShopifyAnalytics.merchantGoogleAnalytics.call(this); } catch(error) {};
     document.write = originalDocumentWrite;
 
-    
+
         window.ShopifyAnalytics.lib.page(
           null,
           {"pageType":"page","resourceType":"page","resourceId":203794817}
         );
-      
-    
+
+
   });
 
-  
+
       var eventsListenerScript = document.createElement('script');
       eventsListenerScript.async = true;
       eventsListenerScript.src = "//cdn.shopify.com/s/assets/shop_events_listener-76ce6d7f3e50d4b8c05874c34d2ea1340c45e5babba61276dadcaeed488ca16a.js";
       document.getElementsByTagName('head')[0].appendChild(eventsListenerScript);
-    
+
 })();</script>
 <script crossorigin="anonymous" defer="defer" src="//cdn.shopify.com/s/assets/shopify_pay/storefront-fe31d6a6f8b299bf1d018618c066f4704f961ac0b1939d90d804f157451c6312.js?v=20181030"></script>
 <script integrity="sha256-0xEZ/rW+4SEKTFurork0jfwbI2U45wPxBFoNkttkWrA=" defer="defer" src="//cdn.shopify.com/s/assets/storefront/express_buttons-d31119feb5bee1210a4c5baba2b9348dfc1b236538e703f1045a0d92db645ab0.js" crossorigin="anonymous"></script>
@@ -249,12 +249,12 @@ for (var attr in meta) {
               <p class="ek">Безопасность.<br> Сделайте так, чтобы в вашу школу посторонний не проник.</p>
             </div>
             <div class="d iv jo kk">
-              <h4><i class="icon-bolt"></i></h4>
-              <p class="ek">Автоматическое введение посещаемости в школе.<br> Быстрое выявление отсутствия ребенка.</p>
-            </div>
-            <div class="d iv jo kk">
               <h4><i class="icon-rocket"></i></h4>
               <p class="ek">Быстрое обслуживание.<br> Быстро установим, в случае сбоев - быстро исправим.</p>
+            </div>
+            <div class="d iv jo kk">
+              <h4><i class="icon-bolt"></i></h4>
+              <p class="ek">Автоматическое введение посещаемости в школе.<br> Быстрое выявление отсутствия ребенка.</p>
             </div>
             <div class="d iv jo kk">
               <h4><i class="icon-compass"></i></h4>
@@ -270,83 +270,83 @@ for (var attr in meta) {
     </div>
 
     <!-- Pricing Tables -->
-    <div class="v valign-wrapper" id = "priceform">
-      <div class="c ci">
-        <div class="d iv jc offset-m1">
-          <div class="c">
-            <div class="d iv kr">
-              <div class="pricing-table">
-                <div class="pricing-header">
-                  <i class="icon-paper-plane"></i>
-                  <h4>Базовое</h4>
-                  <div class="gd">
-                    <span class="hm">Р</span>
-                    <span class="dollars">150</span>
-                    <span class="ic">тысяч</span>
-                  </div>
-                </div>
-                <ul class="pricing-features">
-                  <li class="pricing-feature"><i class="icon-accept"></i>Пропускная система.</li>
-                  <li class="pricing-feature"><i class="icon-accept"></i>Сайт мониторинга.</li>
-                  <li class="pricing-feature"><i class="icon-accept"></i>Стартовая страница школы.</li>
-                  <li class="pricing-feature au"><i class="icon-close"></i>Редактирование стартовой страницы.</li>
-                  <li class="pricing-feature au"><i class="icon-close"></i>Техническое обслуживание.</li>
-                  <li class="pricing-feature au"><i class="icon-close"></i>Реализация ваших идей.</li>
-                  <li class="pricing-feature au"><i class="icon-close"></i>Полное сотрудничество.</li>
-                </ul>
-              </div>
-            </div>
+    <!--<div class="v valign-wrapper" id = "priceform">-->
+    <!--  <div class="c ci">-->
+    <!--    <div class="d iv jc offset-m1">-->
+    <!--      <div class="c">-->
+    <!--        <div class="d iv kr">-->
+    <!--          <div class="pricing-table">-->
+    <!--            <div class="pricing-header">-->
+    <!--              <i class="icon-paper-plane"></i>-->
+    <!--              <h4>Базовое</h4>-->
+    <!--              <div class="gd">-->
+    <!--                <span class="hm">Р</span>-->
+    <!--                <span class="dollars">150</span>-->
+    <!--                <span class="ic">тысяч</span>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--            <ul class="pricing-features">-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Пропускная система.</li>-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Сайт мониторинга.</li>-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Стартовая страница школы.</li>-->
+    <!--              <li class="pricing-feature au"><i class="icon-close"></i>Редактирование стартовой страницы.</li>-->
+    <!--              <li class="pricing-feature au"><i class="icon-close"></i>Техническое обслуживание.</li>-->
+    <!--              <li class="pricing-feature au"><i class="icon-close"></i>Реализация ваших идей.</li>-->
+    <!--              <li class="pricing-feature au"><i class="icon-close"></i>Полное сотрудничество.</li>-->
+    <!--            </ul>-->
+    <!--          </div>-->
+    <!--        </div>-->
 
-            <div class="d iv kr">
-              <div class="pricing-table fk">
-                <div class="pricing-header">
-                  <i class="icon-plane"></i>
-                  <h4>Продвинутое</h4>
-                  <div class="gd">
-                    <span class="hm">Р</span>
-                    <span class="dollars">200</span>
-                    <span class="ic">тысяч</span>
-                  </div>
-                </div>
-                <ul class="pricing-features">
-                  <li class="pricing-feature"><i class="icon-accept"></i>Пропускная система.</li>
-                  <li class="pricing-feature"><i class="icon-accept"></i>Сайт мониторинга.</li>
-                  <li class="pricing-feature"><i class="icon-accept"></i>Стартовая страница школы.</li>
-                  <li class="pricing-feature"><i class="icon-accept"></i>Редактирование стартовой страницы.</li>
-                  <li class="pricing-feature"><i class="icon-accept"></i>Техническое обслуживание.</li>
-                  <li class="pricing-feature au"><i class="icon-close"></i>Реализация ваших идей.</li>
-                  <li class="pricing-feature au"><i class="icon-close"></i>Полное сотрудничество.</li>
-                </ul>
-              </div>
-            </div>
+    <!--        <div class="d iv kr">-->
+    <!--          <div class="pricing-table fk">-->
+    <!--            <div class="pricing-header">-->
+    <!--              <i class="icon-plane"></i>-->
+    <!--              <h4>Продвинутое</h4>-->
+    <!--              <div class="gd">-->
+    <!--                <span class="hm">Р</span>-->
+    <!--                <span class="dollars">200</span>-->
+    <!--                <span class="ic">тысяч</span>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--            <ul class="pricing-features">-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Пропускная система.</li>-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Сайт мониторинга.</li>-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Стартовая страница школы.</li>-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Редактирование стартовой страницы.</li>-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Техническое обслуживание.</li>-->
+    <!--              <li class="pricing-feature au"><i class="icon-close"></i>Реализация ваших идей.</li>-->
+    <!--              <li class="pricing-feature au"><i class="icon-close"></i>Полное сотрудничество.</li>-->
+    <!--            </ul>-->
+    <!--          </div>-->
+    <!--        </div>-->
 
-            <div class="d iv kr">
-              <div class="pricing-table">
-                <div class="pricing-header">
-                  <i class="icon-rocket"></i>
-                  <h4>Полное</h4>
-                  <div class="gd">
-                    <span class="hm">Р</span>
-                    <span class="dollars">300</span>
-                    <span class="ic">тысяч</span>
-                  </div>
-                </div>
-                <ul class="pricing-features">
-                  <li class="pricing-feature"><i class="icon-accept"></i>Пропускная система.</li>
-                  <li class="pricing-feature"><i class="icon-accept"></i>Сайт мониторинга.</li>
-                  <li class="pricing-feature"><i class="icon-accept"></i>Стартовая страница школы.</li>
-                  <li class="pricing-feature"><i class="icon-accept"></i>Редактирование стартовой страницы.</li>
-                  <li class="pricing-feature"><i class="icon-accept"></i>Техническое обслуживание.</li>
-                  <li class="pricing-feature"><i class="icon-accept"></i>Реализация ваших идей.</li>
-                  <li class="pricing-feature"><i class="icon-accept"></i>Полное сотрудничество.</li>
-                </ul>
-              </div>
-            </div>
+    <!--        <div class="d iv kr">-->
+    <!--          <div class="pricing-table">-->
+    <!--            <div class="pricing-header">-->
+    <!--              <i class="icon-rocket"></i>-->
+    <!--              <h4>Полное</h4>-->
+    <!--              <div class="gd">-->
+    <!--                <span class="hm">Р</span>-->
+    <!--                <span class="dollars">300</span>-->
+    <!--                <span class="ic">тысяч</span>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--            <ul class="pricing-features">-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Пропускная система.</li>-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Сайт мониторинга.</li>-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Стартовая страница школы.</li>-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Редактирование стартовой страницы.</li>-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Техническое обслуживание.</li>-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Реализация ваших идей.</li>-->
+    <!--              <li class="pricing-feature"><i class="icon-accept"></i>Полное сотрудничество.</li>-->
+    <!--            </ul>-->
+    <!--          </div>-->
+    <!--        </div>-->
 
-          </div>
-        </div>
-      </div>
-    </div>
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <!--</div>-->
 
     <div class="v r full-height">
       <div class="c">
@@ -357,7 +357,7 @@ for (var attr in meta) {
             <div class="d iv jo kk">
               <div class="m">
                 <div class="card-image">
-                  <a><img src="https://news.ykt.ru/upload/image/2016/10/48265/main.jpg?1475635215"></a>
+                  <a href="http://www.rlspace.ru/"><img src="https://news.ykt.ru/upload/image/2016/10/48265/main.jpg?1475635215"></a>
                   <span class="card-title">Республиканский лицей интернат, г.Якутск.</span>
                 </div>
               </div>
@@ -366,7 +366,7 @@ for (var attr in meta) {
             <div class="d iv jo kk">
               <div class="m">
                 <div class="card-image">
-                  <a><img src="http://www.vesti14.ru/wp-content/uploads/2017/06/ntl-290x320.jpg"></a>
+                  <a href="http://www.ntlschool.pythonanywhere.com/"><img src="http://www.vesti14.ru/wp-content/uploads/2017/06/ntl-290x320.jpg"></a>
                   <span class="card-title">Нюрбинский технический лицей, г.Нюрба.</span>
                 </div>
               </div>
@@ -375,7 +375,7 @@ for (var attr in meta) {
         </div>
       </div>
     </div>
-    
+
 
     <div class="v r valign-wrapper" id = "buyform">
       <div class="c ci">
@@ -452,7 +452,7 @@ for (var attr in meta) {
 		        scrollTop: $("#priceform").offset().top
 		    }, 2000);
 		});
-		
+
     </script>
   </body>
 </html>

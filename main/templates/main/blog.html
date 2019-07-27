@@ -1,0 +1,535 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title> Блог </title>
+      <link rel="stylesheet" href="{% static 'css/blogcss.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}"/>
+      <link rel="stylesheet" type="text/css" href="{% static 'css/slick-theme.css' %}"/>
+      <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
+      <link rel="stylesheet" type="text/css" href="{% static 'css/appwork.css' %}"/>
+      <link rel="stylesheet" type="text/css" href="{% static 'css/theme-corporate.css' %}"/>
+      <link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}"/>
+      <link rel="stylesheet" type="text/css" href="{% static 'css/uikit.css' %}"/>
+      <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.css' %}"/>
+      <link rel="stylesheet" type="text/css" href="{% static 'css/linearicons.css' %}"/>
+      <script type="text/javascript" src="{% static 'js/material-ripple.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/layout-helpers.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/theme-settings.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/pace.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+      <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.0/css/swiper.min.css">
+
+
+  </head>
+   <body>
+      <header>
+          <nav class="navbar fixed-top navbar-expand-lg">
+              <div class="container">
+
+                <a href="#" class="navbar-brand text-large font-weight-bolder line-height-1 py-3"><img src="/media/logo.png" alt="logo" style="height: 60px"></a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header-3">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="header-3">
+                  <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link active" href="#">Главное</a>
+                    <a class="nav-item nav-link" href="#">Разделы</a>
+                    <a class="nav-item nav-link" href="#">О нас</a>
+                    <a class="nav-item nav-link" href="#">Контакты</a>
+                  </div>
+                </div>
+
+              </div>
+            </nav>
+      </header>
+
+      <main><div id="portfolio-slider" class="swiper-container">
+        <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+        <div class="portfolio-image"></div>
+        <div class="slider-content align-items-end p-5">
+        <div class="font-secondary m-md-5 active">
+        <div class="portfolio-caption text-white font-weight-semibold">ESCAPE<br>THE ORDINARY</div>
+        <a href="#" class="portfolio-link text-primary font-weight-bold mt-4">TAKE A LOOK</a>
+        </div>
+        </div>
+        </div>
+
+        <div class="swiper-slide">
+        <div class="portfolio-image" style="background-image: url(assets/img/bg/23.jpg);"></div>
+        <div class="slider-content align-items-end p-5">
+        <div class="font-secondary m-md-5">
+        <div class="portfolio-caption text-white font-weight-semibold">KNOW<br>YOURSELF,<br>KNOW YOUR<br>WORTH</div>
+        <a href="#" class="portfolio-link text-primary font-weight-bold mt-4">TAKE A LOOK</a>
+        </div>
+        </div>
+        </div>
+
+        <div class="swiper-slide">
+        <div class="portfolio-image" style="background-image: url(assets/img/bg/24.jpg);"></div>
+        <div class="slider-content align-items-end p-5">
+        <div class="font-secondary m-md-5">
+        <div class="portfolio-caption text-white font-weight-semibold">YOU ONLY<br>LIVE ONCE</div>
+        <a href="#" class="portfolio-link text-primary font-weight-bold mt-4">TAKE A LOOK</a>
+        </div>
+        </div>
+        </div>
+
+        <div class="swiper-slide">
+        <div class="portfolio-image" style="background-image: url(assets/img/bg/26.jpg);"></div>
+        <div class="slider-content align-items-end p-5">
+        <div class="font-secondary m-md-5">
+        <div class="portfolio-caption text-white font-weight-semibold">INVEST<br>THE NOW<br>IN TOMORROW'S<br>DREAM</div>
+        <a href="#" class="portfolio-link text-primary font-weight-bold mt-4">TAKE A LOOK</a>
+        </div>
+        </div>
+        </div>
+
+        <div class="swiper-slide">
+        <div class="portfolio-image" style="background-image: url(assets/img/bg/25.jpg);"></div>
+        <div class="slider-content align-items-end p-5">
+        <div class="font-secondary m-md-5">
+        <div class="portfolio-caption text-white font-weight-semibold">IT ALWAYS SEEMS<br>IMPOSSIBLE UNTIL<br>IT'S DONE</div>
+        <a href="#" class="portfolio-link text-primary font-weight-bold mt-4">TAKE A LOOK</a>
+        </div>
+        </div>
+        </div>
+
+        </div>
+        <a href="#" class="portfolio-slider-nav swiper-button-prev custom-icon font-secondary text-tiny">
+        <span class="d-inline-block bg-dark text-white p-2"><i class="ion ion-md-arrow-back scaleX--1-rtl"></i> <span class="d-none d-md-inline font-weight-semibold">PREV</span></span>
+        </a>
+        <a href="#" class="portfolio-slider-nav swiper-button-next custom-icon font-secondary text-tiny">
+        <span class="d-inline-block bg-dark text-white p-2"><span class="d-none d-md-inline font-weight-semibold">NEXT</span> <i class="ion ion-md-arrow-forward scaleX--1-rtl"></i></span>
+        </a>
+        </div>
+
+          <div class = "main__about">
+              <h2> Airbnb Luxe предлагает искусно спроектированное жилье в идеальном
+                  состоянии — с роскошными удобствами, услугами и личным менеджером поездки.</h2>
+
+
+          </div>
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide infodiv">
+                  <img class = "img" src="/media/about__img.jpg" alt="about__img">
+                  <h2 class = "title">Выходные в Финляндии</h2>
+                  <p class = "text">Сегодня наш репортаж про выхожные в Финляднии,
+                  которые можно провести просто поехав из Питера на машине, поезде или автобусе</p>
+              </div>
+              <div class="swiper-slide infodiv">
+                  <img class = "img" src="/media/about__img.jpg" alt="about__img">
+                  <h2 class = "title">Выходные в Финляндии</h2>
+                  <p class = "text">Сегодня наш репортаж про выхожные в Финляднии,
+                  которые можно провести просто поехав из Питера на машине, поезде или автобусе</p>
+              </div>
+              <div class="swiper-slide infodiv">
+                  <img class = "img" src="/media/about__img.jpg" alt="about__img">
+                  <h2 class = "title">Выходные в Финляндии</h2>
+                  <p class = "text">Сегодня наш репортаж про выхожные в Финляднии,
+                  которые можно провести просто поехав из Питера на машине, поезде или автобусе</p>
+              </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+          </div>
+
+          <div class = "main__unussial">
+              <h2>Самое необычное жилье в мире</h2>
+              <p class = "info">От виноградников в тосканской сельской местности до уединенных вилл на Бали — каждое жилье
+                  Airbnb Luxe тщательно проверено и является идеальным пунктом назначения.</p>
+
+                <div class = "places_cards">
+
+                    <div class = "place_card">
+                        <img src="/media/1_card.jpg" alt="card">
+                        <div class = "card_text">
+                            <span class = "card_date">22 июля 2019</span><br>
+                            <span class="card_title"> Подмосковье </span><br>
+                            <span class="card_info"> Двухдневное путешествие в Подмосковье с детьми. </span>
+                        </div>
+                        <div class = "card_static">
+                            <img src="/media/comment.png" alt="comment">
+                            <p> 100</p>
+                            <img src="/media/eye.png" alt="pros">
+                            <p> 400</p>
+                        </div>
+                    </div>
+
+                    <div class = "place_card">
+                        <img src="/media/2_card.jpg" alt="card">
+                        <div class = "card_text">
+                            <span class = "card_date">22 июля 2019</span><br>
+                            <span class="card_title"> РОСКОШНЫЕ УДОБСТВА </span><br>
+                            <span class="card_info"> Полностью оборудованное жилье удовлетворит все ваши
+                            потребности и обеспечит достаточный простор и уединение. </span>
+                        </div>
+                        <div class = "card_static">
+                            <img src="/media/comment.png" alt="comment">
+                            <p> 100</p>
+                            <img src="/media/eye.png" alt="pros">
+                            <p> 400</p>
+                        </div>
+                    </div>
+
+                    <div class = "place_card">
+                        <img src="/media/3_card.jpg" alt="card">
+                        <div class = "card_text">
+                            <span class = "card_date">22 июля 2019</span><br>
+                            <span class="card_title"> ОСМОТР ПО БОЛЕЕ ЧЕМ 300 ПУНКТАМ </span><br>
+                            <span class="card_info"> Каждый объект проверяется на безупречное техническое состояние. </span>
+                        </div>
+                        <div class = "card_static">
+                            <img src="/media/comment.png" alt="comment">
+                            <p> 100</p>
+                            <img src="/media/eye.png" alt="pros">
+                            <p> 400</p>
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide infodiv">
+                  <img src="/media/travel__img.jpg" alt="about__img" class="travel__img">
+                  <h2 class = "title">Выходные в Финляндии</h2>
+                  <p class = "text">Сегодня наш репортаж про выхожные в Финляднии,
+                  которые можно провести просто поехав из Питера на мишание, поезде или автобусе</p>
+              </div>
+              <div class="swiper-slide infodiv">
+                  <img src="/media/travel__img.jpg" alt="about__img" class="travel__img">
+                  <h2 class = "title">Выходные в Финляндии</h2>
+                  <p class = "text">Сегодня наш репортаж про выхожные в Финляднии,
+                  которые можно провести просто поехав из Питера на мишание, поезде или автобусе</p>
+              </div>
+              <div class="swiper-slide infodiv">
+                  <img src="/media/travel__img.jpg" alt="about__img" class="travel__img">
+                  <h2 class = "title">Выходные в Финляндии</h2>
+                  <p class = "text">Сегодня наш репортаж про выхожные в Финляднии,
+                  которые можно провести просто поехав из Питера на мишание, поезде или автобусе</p>
+              </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+          </div>
+
+            <div class = "main__directions">
+                <h2>Разделы сайта</h2>
+
+                <div class = "directions">
+                    <div class = "direction">
+                        <img src="/media/punta mita.jpg" alt="">
+                        <p>РЕПОРТАЖЕЙ: 50<br>
+                            <span> Ponta Mita</span>
+                        </p>
+                    </div>
+                    <div class = "direction">
+                        <img src="/media/tuscany.jpg" alt="">
+                        <p>РЕПОРТАЖЕЙ: 80<br>
+                            <span> Tuscany </span>
+                        </p>
+                    </div>
+                    <div class = "direction">
+                        <img src="/media/los angeles.jpg" alt="">
+                        <p>РЕПОРТАЖЕЙ: 100<br>
+                            <span> Los Angeles</span>
+                        </p>
+                    </div>
+                </div>
+                <div class = "directions">
+                    <div class = "direction">
+                        <img src="/media/bali.jpg" alt="">
+                        <p>РЕПОРТАЖЕЙ: 130<br>
+                            <span> Bali </span>
+                        </p>
+                    </div>
+                    <div class = "direction">
+                        <img src="/media/costa rica.jpg" alt="">
+                        <p>РЕПОРТАЖЕЙ: 60<br>
+                            <span> Costa Rica</span>
+                        </p>
+                    </div>
+                    <div class = "direction">
+                        <img src="/media/swiss alps.jpg" alt="">
+                        <p>РЕПОРТАЖЕЙ: 40<br>
+                            <span> Франция </span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class = "directions-slider">
+                    <div class = "slide">
+                        <img src="/media/punta mita.jpg" alt="">
+                        <p>РЕПОРТАЖЕЙ: 50<br>
+                            <span> Ponta Mita</span>
+                        </p>
+                    </div>
+                    <div class = "slide">
+                        <img src="/media/tuscany.jpg" alt="">
+                        <p>РЕПОРТАЖЕЙ: 80<br>
+                            <span> Tuscany </span>
+                        </p>
+                    </div>
+                    <div class = "slide">
+                        <img src="/media/los angeles.jpg" alt="">
+                        <p>РЕПОРТАЖЕЙ: 100<br>
+                            <span> Los Angeles</span>
+                        </p>
+                    </div>
+                    <div class = "slide">
+                        <img src="/media/bali.jpg" alt="">
+                        <p>РЕПОРТАЖЕЙ: 130<br>
+                            <span> Bali </span>
+                        </p>
+                    </div>
+                    <div class = "slide">
+                        <img src="/media/costa rica.jpg" alt="">
+                        <p>РЕПОРТАЖЕЙ: 60<br>
+                            <span> Costa Rica</span>
+                        </p>
+                    </div>
+                    <div class = "slide">
+                        <img src="/media/swiss alps.jpg" alt="">
+                        <p>РЕПОРТАЖЕЙ: 40<br>
+                            <span> Франция </span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class = "main__another_directions">
+                <h2> Другие направления </h2>
+
+                <div class="continents">
+                    <div class = "continent">
+                        <p>Азия и Океания</p>
+                        <ul>
+                            <li>Бали</li>
+                            <li>Остров Самуи</li>
+                            <li>Панг-Нга</li>
+                            <li>Пхукет</li>
+                            <li>Новая Зеландия</li>
+                            <li>Сидней</li>
+
+                        </ul>
+                    </div>
+
+                    <div class = "continent">
+                        <p>Африка</p>
+                        <ul>
+                            <li>Кейптаун</li>
+                            <li>Марракеш</li>
+
+                        </ul>
+                    </div>
+
+                    <div class = "continent">
+                        <p>Еврова</p>
+                        <ul>
+                            <li>Лондон</li>
+                            <li>Апулия</li>
+                            <li>Сицилия</li>
+                            <li>Swiss Apls</li>
+                            <li>Тоскана</li>
+
+                        </ul>
+                    </div>
+                    <div class = "continent">
+                        <p>Карибские острова</p>
+                        <ul>
+                            <li>Ангилия</li>
+                            <li>Антигуа и Барбурда</li>
+                            <li>Бардабос</li>
+                            <li>Bonaire</li>
+                            <li>Каймановы о-ва</li>
+                            <li>Доминиканская Республика</li>
+                            <li>Ямайка</li>
+                            <li>Saint Barthelemy</li>
+                            <li>О-ва Тёркс и Кайкос</li>
+                        </ul>
+                    </div>
+                    <div class = "continent">
+                        <p>Латинская Америка</p>
+                        <ul>
+                            <li>Коста-Рика</li>
+                            <li>Кабо-Сан-Лукас</li>
+                            <li>Пуэрто-Вальярта</li>
+                            <li>Punta Mita</li>
+                            <li>Riviera Maya</li>
+                            <li>Нуэво-Вальярта  </li>
+                        </ul>
+                    </div>
+                    <div class = "continent">
+                        <p>США</p>
+                        <ul>
+                            <li>Остров Гавайи</li>
+                            <li>Лос-Анджелес</li>
+                            <li>Палм-Спрингс</li>
+                            <li>Парк-Сити</li>
+                            <li>Юта</li>
+                            <li>Вайл</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <p class = "all_homes"><a href="#">Показать всё жилье Airbnb Luxe &raquo;</a></p>
+
+                <div class ="want_home">
+
+                        <h3>Хотите жилье на Airbnb Luxe? <span class = "go">Подать заявку</span></h3>
+
+                </div>
+            </div>
+      </main>
+
+      <script type="text/javascript" src="{% static 'js/popper.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/slick.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/plyr.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/swiper.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/pace.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/landing.js' %}"></script>
+        <script>
+          $('#header-16 .navbar-search-input > input').on('focus', function() {
+            $('#header-16 .navbar-search-box').addClass('active');
+          });
+          $('#header-16 .navbar-search-cancel').on('click', function(e) {
+            e.preventDefault();
+            $('#header-16 .navbar-search-box').removeClass('active');
+          });
+        </script>
+      <script type="text/javascript">
+          var height = document.getElementById('header-img').clientHeight;
+
+          var x = 0;
+
+          if(document.documentElement.clientWidth < 992){
+              x = 350;
+              $("nav").addClass("bg-white");
+          }else if (document.documentElement.clientWidth < 1200){
+            x = 380;
+          }
+          else if(document.documentElement.clientWidth < 1235){
+              x = 440;
+          }
+          else {
+              x = 530;
+          }
+          document.getElementById("header-main").style.marginBottom = (height - x) + "px";
+      </script>
+
+      <script type="text/javascript">
+
+          $('.directions-slider').slick({
+
+              infinite: false,
+              speed: 300,
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              responsive: [
+                {
+                  breakpoint: 1024,
+                  settings: {
+                    arrows: false,
+                    slidesToShow: 2,
+                    infinite: false,
+                  }
+                },
+                {
+                  breakpoint: 600,
+                  settings: {
+                    arrows: false,
+                    slidesToShow: 2,
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    arrows: false,
+                    slidesToShow: 2,
+                  }
+                }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+              ]
+          });
+      </script>
+      <script type="text/javascript">
+      $(document).ready(function () {
+          //initialize swiper when document ready
+          var swiper = new Swiper('.swiper-container', {
+              autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+              },
+
+
+             pagination: {
+               el: '.swiper-pagination',
+               clickable: true,
+             },
+           });
+      });
+      </script>
+      <script type="text/javascript">
+      $(function () {
+          $(document).scroll(function () {
+          var $nav = $(".navbar");
+          $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height()-50);
+          });
+      });
+      </script>
+      <script type="text/javascript">
+        var s = 0;
+        $('.mobile-tab').hide();
+
+        $('.menu').on('click', function(){
+
+            $('.mobile-tab').slideToggle();
+
+            if(s%2==0){
+                $(".header__logo").css('display', 'none');
+                $(".menu").css('color', 'red');
+                $("body").addClass("fixed");
+            }else{
+                setTimeout(function(){
+                    $(".header__logo").css('display', 'block');
+                }, 380);
+
+                $(".menu").css('color', 'white');
+                $("body").removeClass("fixed");
+
+            }
+            s += 1;
+
+        });
+
+      </script>
+      <script type="text/javascript">
+      $(function () {
+          $(document).scroll(function () {
+          var $nav = $(".navbar");
+          $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height()-50);
+          });
+      });
+      </script>
+
+
+  </body>
+</html>

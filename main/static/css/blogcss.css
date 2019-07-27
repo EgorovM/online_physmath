@@ -1,0 +1,632 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+
+.arrow{
+    display: none;
+}
+
+nav{
+    position: fixed;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    color: inherit !important;
+}
+
+.portfolio-image{
+    background-image: url("/static/header__img.jpg");
+}
+
+.directions-slider{
+    display: none !important;
+}
+.header_img{
+    position: absolute;
+    z-index: -10;
+    width: 100%;
+    object-fit: cover;
+}
+header{
+    width: 100%;
+}
+
+.desktop{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 5%;
+}
+
+.header__logo, .header__logo_mobile{
+    text-transform: uppercase;
+    margin-left: 5%;
+    margin-top: 5px;
+}
+
+.header__main{
+    text-align:  center;
+    padding-top: 400px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.header__main h1{
+    font-family: 'Roboto';
+    font-weight: 600;
+}
+
+.header__main_info{
+    font-weight: lighter;
+    font-size: 18px;
+}
+.header__place{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+header p{
+    color: #fff;
+    margin-left: 10px;
+}
+.swiper-container {
+    margin: 0 100px;
+    width: 86%;
+    height: 100%;
+}
+
+.swiper-slide{
+    text-align: center;
+}
+.swiper-slide img{
+    width: 100%;
+}
+
+.swiper-pagination{
+    padding-top: 30px;
+}
+.main__about{
+    text-align: center;
+    display: grid;
+}
+
+.main__about h2{
+    margin: 150px auto 150px auto;
+    width: 43%;
+    font-size: 30px;
+    font-weight: 400;
+    color: #212121;
+}
+
+.main__about img{
+    margin: auto;
+    width: 86%;
+}
+
+.infodiv{
+    color: #fff;
+}
+.infodiv .img {
+	position	: relative;
+	width		: 100%; /* for IE 6 */
+}
+
+.navbar-nav a{
+    color: #fff;
+}
+.navbar.scrolled {
+  background-color: #fff !important;
+  transition: background-color 200ms linear;
+}
+.navbar.scrolled a{
+    color: #545454;
+}
+
+.infodiv .title {
+	position	: absolute;
+    font-size: 30px;
+    font-weight: bold;
+	top		: 40%;
+	width: 100%;
+    padding: 0 25%;
+}
+
+.infodiv .text{
+    position	: absolute;
+	top		: 46%;
+    font-weight: lighter;
+	width		: 100%;
+    padding: 0 25%;
+}
+
+.swiper-pagination-bullet-active{
+    background: #fff !important;
+}
+.swiper-pagination-bullet{
+    background: #fff !important;
+}
+.main__unussial{
+    padding-bottom: 150px;
+}
+.main__unussial h2{
+    text-align: center;
+    font-size: 30px;
+    margin-top: 150px;
+    font-weight: normal;
+}
+
+.main__unussial .info{
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.main__unussial .places_cards{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 100px;
+}
+
+.place_card{
+    position: relative;
+    display: block;
+    width: 40%;
+    margin: 20px;
+    background: #eee;
+}
+.place_card img{
+    margin: 20px;
+    width: 92%;
+}
+
+.card_text{
+    margin: 0px 20px 50px 20px;
+    display: block;
+    text-align: left;
+}
+
+.card_text .card_date{
+    font-size: 12px;
+    font-weight: lighter;
+}
+.card_text .card_title{
+    font-size: 13px;
+    color: #757575;
+    font-weight: lighter;
+    text-transform: uppercase;
+}
+
+.card_text .card_info{
+    color: #212121;
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.card_static{
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+}
+.card_static img{
+    height: 20px;
+    width: 20px !important;
+    margin: 0;
+    margin-left: 20px;
+}
+.card_static p{
+    margin-left: 5px;
+}
+
+.mexico{
+    margin-top: 150px;
+    width: 100%;
+}
+
+.img_info{
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+.photo{
+    text-align: center;
+}
+
+.main__directions{
+    padding: 0 100px;
+    margin-top: 70px;
+    background: #eee;
+}
+
+.main__directions h2{
+    text-align: center;
+    margin-bottom: 80px;
+    font-size: 30px;
+    padding-top: 70px;
+    font-weight: normal;
+}
+
+.directions{
+    display: flex;
+    text-align: center;
+}
+
+.directions .direction img{
+    width: 97%;
+    border-radius: 4px;
+}
+
+.directions .direction p{
+    width: 97%;
+    margin: auto;
+    text-align: left;
+    font-size: 10px;
+    color: #212121;
+}
+
+.directions .direction span{
+    font-size: 18px;
+    font-weight: lighter;
+    color: #757575;
+}
+
+.direction{
+    margin-bottom: 50px;
+}
+
+.main__another_directions{
+    margin: 0 130px;
+    margin-top: 80px;
+}
+
+.main__another_directions h2{
+    text-align: center;
+    font-size: 30px;
+    font-weight: normal;
+}
+.main__another_directions .continents{
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main__another_directions .continents .continent p{
+    font-weight: bold;
+}
+
+.main__another_directions .continents .continent li{
+    margin-top: 16px;
+}
+
+.main__another_directions .all_homes{
+    margin-top: 60px;
+    color: #6d5bfc;
+}
+
+.main__another_directions .want_home{
+    margin: 80px 0;
+    text-align: center;
+}
+
+.main__another_directions .want_home hr{
+    color: #eee;
+    height: 1px;
+}
+
+.main__another_directions .want_home h3{
+    font-size: 16px;
+    color: #444444;
+    padding: 70px 0;
+
+    border-top: 1px solid #e6e2e2;
+    border-bottom: 1px solid #e6e2e2;
+}
+
+.main__another_directions .want_home .go{
+    font-size: 16px;
+    color: #6d5bfc;
+    margin: 70px 0;
+}
+
+
+.mobile-tab{
+    display: none;
+}
+@media screen and (max-width: 1600px){
+    .place_card img{
+        width: 91%;
+    }
+}
+
+@media screen and (max-width: 1470px){
+    .place_card img{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 1280px){
+    .place_card img{
+        width: 89%;
+    }
+}
+
+@media screen and (max-width: 1126px){
+
+    .header__main h1{
+        font-size: 30px;
+    }
+    .main__about h2{
+        font-size: 20px;
+    }
+
+    .main__unussial .places_cards{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .place_card img{
+        width: 87%;
+    }
+
+    .main__unussial .places_cards{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .main__directions{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .main__another_directions{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+.divider{
+    border-bottom: 1px solid #eee;
+}
+.menu{
+    position: relative;
+    z-index: 9999;
+    color: #000 !important;
+}
+header{
+    z-index: -4;
+}
+.mobile-tab{
+    height: 1000px;
+    top: 0;
+    z-index: -6;
+    top: 0px;
+    display: flex;
+    width: 100%;
+    background: #fff;
+    flex-direction: column;
+}
+.mobile-tab a{
+    font-size: 1.3em;
+    color: #000000;
+    font-weight: lighter;
+    letter-spacing: 1px;
+}
+
+.mobile-tab li{
+    list-style-type: none;
+    margin: 5% 5%;
+}
+
+.header__logo_mobile{
+    display: none;
+    margin-right: 5%;
+}
+.mobile-tap ul{
+    padding: 5% 0;
+}
+
+.fixed {
+    position:fixed; /*позицианируем чтобы исчез скролл*/
+    width:100%; /*что бы верстка не складывалась по ширине*/
+}
+
+
+
+@media screen and (max-width: 1200px){
+
+    .card_static{
+        right: 20px;
+        margin: 0;
+    }
+
+    .card_static p{
+        margin-right: 10px;
+    }
+    .mobile-tab{
+        display: block;
+    }
+    .header__logo{
+        text-align: center;
+        margin-left: 35%;
+    }
+    .menu{
+        font-size: 20px;
+    }
+    .header__logo_mobile{
+        display: block;
+        margin-top: 20px;
+        padding-bottom: 20px;
+    }
+    .menu{
+    }
+    .description{
+        margin-left: 10px;
+    }
+
+    header p{
+        margin: 0;
+    }
+
+    .header__logo{
+    }
+    .directions-slider{
+        display: block !important;
+    }
+    .header__main{
+        padding-top: 300px;
+    }
+
+    .header__main h1{
+        font-size: 30px;
+        font-weight: normal;
+        width: 48%;
+        margin: auto;
+    }
+
+    .main__about h2{
+        width: 90%;
+        color: #797979;
+        font-size: 18px;
+    }
+    .arrow{
+        display: inherit;
+    }
+    .img_info{
+        text-align: left;
+        width: 86%;
+        margin: auto;
+        font-size: 10px;
+    }
+
+    .main__unussial{
+        background: #eee;
+        padding: 0 20px;
+        margin-bottom: 150px;
+    }
+
+    .main__unussial h2{
+        padding-top: 30px;
+        text-align: left;
+    }
+
+    .main__unussial .info{
+        text-align: left;
+        width: 100%;
+    }
+
+    .main__unussial .places_cards{
+         flex-direction: column;
+         margin: 0;
+    }
+
+    .slide img{
+        width: 95%;
+    }
+    .main__unussial .places_cards .place_card{
+        margin: 0;
+        margin-bottom: 20px;
+        display: flex;
+    }
+
+    .place_card{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .place_card .card_info{
+        font-size: 14px;
+    }
+
+    .place_card img{
+        width: 20%;
+        margin: 0;
+    }
+    .main__unussial .places_cards .place_card .card_text{
+        margin: 0;
+        margin-left: 20px;
+        width: 100%;
+    }
+
+    .photo .travel__img{
+        width: 86%;
+    }
+
+    .main__another_directions .continents{
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    .main__another_directions .continents .continent{
+        margin-top: 30px;
+    }
+
+    .main__another_directions .continents .continent{
+        font-size: 14px;
+    }
+
+    .main__another_directions{
+        margin: 0;
+        padding: 100px 20px 0 20px;
+        background: #eee;
+    }
+
+    .main__another_directions h2{
+        text-align: left;
+        font-size: 24px;
+        font-weight: 400;
+    }
+
+    .directions{
+        display: none;
+    }
+
+    .directions-slider{
+        margin: 0 20px;
+    }
+
+    .slide img{
+        border-radius: 4px;
+        width: 90%;
+    }
+
+    .slide p{
+        margin-top: 10px;
+        font-size: 13px;
+    }
+
+    .slide span{
+        font-size: 18px;
+    }
+
+    .main__directions h2{
+        font-size: 22px;
+        text-align: left;
+    }
+}
+@media screen and (max-width: 950px){
+    .infodiv .title{
+        font-size: 20px;
+    }
+    .infodiv .text{
+        font-size: 16px;
+    }
+    .header__main{
+        padding-top: 225px;
+    }
+}
+
+@media screen and (max-width: 770px){
+    .header__main{
+        padding-top: 195px;
+    }
+}

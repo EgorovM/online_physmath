@@ -84,7 +84,7 @@ class Pupil(models.Model):
     non_attendance = models.IntegerField(default = 0);
 
     def __str__(self):
-    	return str(self.qrcode)
+    	return str(self.index)
 
 class Order(models.Model):
 	email       = models.CharField(max_length = 70)
