@@ -29,26 +29,23 @@ secret_word = "axaxloleslivslomaesh"
 
 ykt_utc = timezone('Asia/Yakutsk')
 
-def blog(request):
-    context = {}
-
-    request = render(request, 'main/blog.html', context)
-
-    return request
 
 def information(request):
-	context = {}
+    if not request.user.is_authenticated():
+        return redirect("/")
 
-	pupils = Pupil.objects.all()
-	pupils_list = sorted(pupils, key = operator.attrgetter('grade','name'))
+    context = {}
 
-	context["pupils"] = pupils_list
-	context["in_school"] = len(Pupil.objects.filter(status = "present"))
-	context["pupils_amt"] = len(pupils)
+    pupils = Pupil.objects.all()
+    pupils_list = sorted(pupils, key = operator.attrgetter('grade','name'))
 
-	request = render(request, 'main/information.html', context)
+    context["pupils"] = pupils_list
+    context["in_school"] = len(Pupil.objects.filter(status = "present"))
+    context["pupils_amt"] = len(pupils)
 
-	return request
+    request = render(request, 'main/information.html', context)
+
+    return request
 
 
 def index(request):
@@ -62,6 +59,8 @@ def index(request):
     return request
 
 def monitoring(request):
+    if not request.user.is_authenticated():
+        return redirect("/")
     context = {}
 
     pupils = Pupil.objects.all()
@@ -74,29 +73,31 @@ def monitoring(request):
     return request
 
 def about(request):
-	context = {}
+    context = {}
 
-	if request.method == "POST":
-		if "ok_button" in request.POST:
-			email   = request.POST["email"]
-			school  = request.POST["school"]
-			message = request.POST["message"]
+    if request.method == "POST":
+    	if "ok_button" in request.POST:
+    		email   = request.POST["email"]
+    		school  = request.POST["school"]
+    		message = request.POST["message"]
 
-			order = Order()
+    		order = Order()
 
-			order.email = email
-			order.school_name = school
-			order.message = message
-			order.date = datetime.now(tz = ykt_utc)
+    		order.email = email
+    		order.school_name = school
+    		order.message = message
+    		order.date = datetime.now(tz = ykt_utc)
 
-			order.save()
+    		order.save()
 
-	request = render(request, 'main/about.html')
+    request = render(request, 'main/about.html')
 
-	return request
+    return request
 
 
 def board(request):
+    if not request.user.is_authenticated():
+        return redirect("/")
     context = {}
 
     pupils = Pupil.objects.filter(location = "boarding")
@@ -111,6 +112,8 @@ def board(request):
     return request
 
 def canteen(request):
+    if not request.user.is_authenticated():
+        return redirect("/")
     context = {}
 
     pupils = Pupil.objects.all()
@@ -125,44 +128,53 @@ def canteen(request):
     return request
 
 def profile(request, views_profile_id):
-	context = {}
-	context["is_admin"] = False
+    if not request.user.is_authenticated():
+        return redirect("/")
+    context = {}
+    context["is_admin"] = False
 
-	if request.user.is_authenticated():
-		context["is_admin"] = True
+    if request.user.is_authenticated():
+    	context["is_admin"] = True
 
 
-	profile = Pupil.objects.get(id = views_profile_id)
-	events  = Event.objects.filter(profile = profile)
+    profile = Pupil.objects.get(id = views_profile_id)
+    events  = Event.objects.filter(profile = profile)
 
-	if request.method == "POST":
-		event = Event(profile = profile)
+    if request.method == "POST":
+    	event = Event(profile = profile)
 
-		if "enter" in request.POST:
-			profile.status = "present"
-			event.text = "пришел в школу"
-			event.color = "#8bc34a"
-		elif "eating" in request.POST:
-			profile.eating = True
-			event.text = "пришел в столовую"
-			event.color = "#2196f3"
-		elif "exit" in request.POST:
-			profile.status = "absent"
-			event.text = "вышел из школы"
-			event.color = "#f44336"
+    	if "enter" in request.POST:
+    		profile.status = "present"
+    		event.text = "пришел в школу"
+    		event.color = "#8bc34a"
+    	elif "eating" in request.POST:
+    		profile.eating = True
+    		event.text = "пришел в столовую"
+    		event.color = "#2196f3"
+    	elif "exit" in request.POST:
+    		profile.status = "absent"
+    		event.text = "вышел из школы"
+    		event.color = "#f44336"
+    	elif "exit_board" in request.POST:
+    		profile.inboard = False
+    		event.text = "вышел из интерната"
+    		event.color = "#ff9800"
+    	elif "enter_board" in request.POST:
+    		profile.inboard = True
+    		event.text = "пришел в интернат"
+    		event.color = "#cddc39"
+    	event.time = datetime.now(tz = ykt_utc).time()
+    	profile.arrive_time =  datetime.now(tz = ykt_utc).time()
 
-		event.time = datetime.now(tz = ykt_utc).time()
-		profile.arrive_time =  datetime.now(tz = ykt_utc).time()
+    	profile.save()
+    	event.save()
 
-		profile.save()
-		event.save()
+    context["events"]  = events
+    context["profile"] = profile
 
-	context["events"]  = events
-	context["profile"] = profile
+    request = render(request, "main/profile.html", context)
 
-	request = render(request, "main/profile.html", context)
-
-	return request
+    return request
 
 def mark(request):
     get_index = "-1"
@@ -285,46 +297,64 @@ def mark(request):
             	profile = Pupil.objects.values('index', 'name', 'grade', 'photo').filter(index = get_index)
 
             return JsonResponse({'profile': list(profile)})
+    elif request.GET.get("get_products"):
+        return JsonResponse({"products": [{"name": "A4", "category": "paper"}]})
 
     return HttpResponseRedirect("/")
 
 
 
 def get_attendance_list(request):
-    d = {"pupil":[], "grade":[], "location":[],}
+    excel_file_name = "Посещаемость в школе.xlsx"
 
+    d = {}
 
     conn = sqlite3.connect('/home/EgorovM/online_physmath/db.sqlite3')
     cursor = conn.cursor()
 
-    day        = cursor.execute('SELECT * FROM main_day') #0 - index, #2 - date
+    d = {}
 
-    for row in day:
-        d[row[0]] = []
+    days       = cursor.execute('SELECT date FROM main_day')
+    days_list  = [row[0] for row in days]
+    pupil      = cursor.execute('SELECT name FROM main_pupil')
+    pupil_list = [row[0] for row in pupil]
 
-    for row in cursor.execute('SELECT * FROM main_pupil'):
-        d["pupil"].append(row[2])
-        d["grade"].append(row[3])
-        d["location"].append(row[4])
+    attendance_table = cursor.execute("""
+        SELECT
+            main_day.date,
+        	main_pupil.name
+        FROM main_pupil
+        	LEFT OUTER join main_day_pupil
+            	on main_pupil.id = main_day_pupil.pupil_id
+            LEFT OUTER JOIN main_day
+            	on main_day.id = main_day_pupil.day_id
+    """)
 
-    day = cursor.execute('SELECT * FROM main_day')
+    for name in pupil_list:
+        d[name] = [0 for i in range(len(days_list))]
 
-    for row in day:
-        for i in range(len(d["pupil"])):
-            d[row[0]].append(0)
+    for row in attendance_table:
+        try:
+            d[row[1]][days_list.index(row[0])] = 1
+        except:
+            pass
 
-    for row in cursor.execute('SELECT * FROM main_day_pupil'):
-        d[row[1]][row[2]-1] = 1
 
-    data = pd.DataFrame(data = d)
+    data = pd.DataFrame.from_dict(data = d, orient='index',
+                        columns = days_list)
+    writer = pd.ExcelWriter(excel_file_name, engine='xlsxwriter')
+    data.to_excel(writer, sheet_name = "Attendance")
 
-    for row in cursor.execute('SELECT * FROM main_day'):
-        data[row[1]] = data[row[0]]
-        del data[row[0]]
+    workbook  = writer.book
+    worksheet = writer.sheets['Attendance']
 
-    data.to_excel("Посещаемость в школе.xlsx",index = False)
+    cell_format = workbook.add_format({"pattern": 1, "bg_color": "#FDD83C", "align": "left"})
 
-    excel_file_name = "Посещаемость в школе.xlsx"
+    worksheet.freeze_panes(1,1)
+    worksheet.set_column('A:A', 30, cell_format)
+    worksheet.set_column('B:AIT', 15)
+
+    writer.save()
 
     fp = open(excel_file_name, "rb");
     response = HttpResponse(fp.read());
